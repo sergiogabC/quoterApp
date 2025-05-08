@@ -24,24 +24,22 @@ CREATE TABLE profit_center(
     PRIMARY KEY(cod_profit)
 );
 
-CREATE TABLE material_cost(
-	cod_cost INT AUTO_INCREMENT NOT NULL,
-    cost_value DECIMAL(8,2) NOT NULL,
-    costing_date DATE NOT NULL,
-    pls DECIMAL(4,3) NOT NULL,
-    cost_total_value DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY(cod_cost)
-);
-
 CREATE TABLE materials (
 	material_number VARCHAR(225) NOT NULL,
-    cod_cost INT NOT NULL,
     cod_profit INT NOT NULL,
+    cost_value DECIMAL(10,2),
     description TEXT NOT NULL,
     FOREIGN KEY(cod_profit) REFERENCES profit_center,
-    FOREIGN KEY(cod_cost) REFERENCES material_cost,
     PRIMARY KEY(material_number)
 );
 
--- ALTER TABLE materials 
--- ADD material_number BINARY(16)
+CREATE TABLE cost_total(
+	cod_cost INT AUTO_INCREMENT NOT NULL,
+    material_number VARCHAR(225) NOT NULL,
+    costing_date DATE NOT NULL,
+    pls DECIMAL(4,3) NOT NULL,
+    cost_total_value DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY(cod_cost),
+    FOREIGN KEY(material_number) REFERENCES materials
+);
+

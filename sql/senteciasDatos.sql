@@ -2,39 +2,39 @@ use QTOS;
 
 SELECT * FROM costing_report;
 
+SELECT COUNT(DISTINCT material_number) FROM costing_report;
+
 -- Insertar Datos en profit_center
 INSERT INTO profit_center(profit_value)
 SELECT DISTINCT profit_center
 from costing_report;
 
-DROP TABLE materials;
-DROP TABLE profit_center; 
+-- DROP TABLE cost_total;
+-- DROP TABLE materials;
+-- DROP TABLE profit_center; 
 
 SELECT * FROM profit_center;
+SELECT cod_profit, profit_value FROM profit_center
+ORDER BY cod_profit ASC;
 
--- Insertar datos de material_cost
-INSERT INTO material_cost(cost_value, costing_date, pls, cost_total_value)
-SELECT material_cost, costing_date, pls, cost_total
+-- Insertar datos de materials
+INSERT INTO materials(material_number, cost_value, description,cod_profit)
+SELECT CR.material_number, CR.material_cost, CR.description , PC.cod_profit
+FROM costing_report AS CR
+INNER JOIN profit_center PC ON CR.profit_center = PC.profit_value
+WHERE PC.profit_value = CR.profit_center;
+
+-- DROP TABLE materials;
+
+SELECT * FROM materials;
+
+-- Insertar datos en cost_total
+INSERT INTO cost_total(material_number, costing_date, pls, cost_total_value)
+SELECT material_number, costing_date, pls, cost_total
 FROM costing_report;
 
-SELECT * FROM material_cost;
-
--- Insertar datos en materials
-INSERT INTO materials(material_number, description, cod_cost, cod_profit)
-SELECT
-(SELECT material_number, description FROM costing_report), 
-(SELECT cod_cost FROM material_cost WHERE material_cost.cost_total_value = costing_report.cost_total AND material_cost.costing_date = costing_report),
-(SELECT cod_profit FROM profit_center);
+SELECT * FROM cost_total
 
 
--- USE QTOS;
 
--- SELECT count(distinct cost_total) as costo_total_distinct, count(cost_total) as costo_total FROM costing_report;
-
--- SELECT count(distinct costing_date ) as costo_total_distinct, count(costing_date) as costo_total FROM costing_report;
-
--- SELECT COUNT(DISTINCT cost_total) FROM costing_report
--- WHERE cost_total in(
--- 	SELECT distinct costing_date FROM costing_report
--- );
 
