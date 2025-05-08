@@ -37,4 +37,15 @@ SELECT * FROM cost_total
 
 
 
+-- use QTOS;
 
+-- SELECT * FROM materials
+-- order by description ASC;
+
+-- SELECT * FROM profit_center;
+-- SELECT cod_profit, profit_value FROM profit_center
+-- ORDER BY cod_profit ASC;
+
+-- SELECT * FROM profit_center LIMIT 5;
+-- SELECT * FROM materials LIMIT 5;
+-- SELECT * FROM cost_total LIMIT 5;
