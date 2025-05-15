@@ -27,7 +27,7 @@ CREATE TABLE profit_center(
 CREATE TABLE materials (
 	material_number VARCHAR(225) NOT NULL,
     cod_profit INT NOT NULL,
-    cost_value DECIMAL(10,2),
+    cost_value DECIMAL(10,2) NOT NULL,
     description TEXT NOT NULL,
     FOREIGN KEY(cod_profit) REFERENCES profit_center,
     PRIMARY KEY(material_number)
