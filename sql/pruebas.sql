@@ -11,14 +11,14 @@ ORDER BY cod_profit ASC;
 SELECT * FROM costing_report LIMIT 5;
 SELECT * FROM profit_center LIMIT 5;
 SELECT * FROM materials LIMIT 5;
-SELECT * FROM materials_cost LIMIT 5;
+SELECT * FROM material_cost LIMIT 5;
 
 SELECT count(costing_date) FROM cost_total
 WHERE costing_date = costing_date;
 
 SELECT CONSTRAINT_NAME
 FROM information_schema.KEY_COLUMN_USAGE
-WHERE TABLE_NAME = 'cost_total'
+WHERE TABLE_NAME = 'material_cost'
   AND TABLE_SCHEMA = 'qtos'
   AND REFERENCED_TABLE_NAME IS NOT NULL;
 
