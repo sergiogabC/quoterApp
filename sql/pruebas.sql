@@ -18,11 +18,11 @@ WHERE costing_date = costing_date;
 
 SELECT CONSTRAINT_NAME
 FROM information_schema.KEY_COLUMN_USAGE
-WHERE TABLE_NAME = 'material_cost'
+WHERE TABLE_NAME = 'cost_total'
   AND TABLE_SCHEMA = 'qtos'
   AND REFERENCED_TABLE_NAME IS NOT NULL;
 
-SELECT costing_date,cost,cost_total_value FROM materials_cost
+SELECT costing_date,cost,cost_total_value FROM material_cost
 WHERE cod_cost =(SELECT cod_cost FROM materials WHERE material_number = '000000000001025905');
 
 SELECT * FROM costing_report WHERE material_number = '000000000008018891';

@@ -53,7 +53,7 @@ REFERENCES material_cost(cod_cost);
 
 SELECT * FROM materials;
 
--- ALTERAR la tabla cost_total
+-- ALTERAR la tabla material_cost
 
 ALTER TABLE material_cost
 DROP FOREIGN KEY material_cost_ibfk_1;
