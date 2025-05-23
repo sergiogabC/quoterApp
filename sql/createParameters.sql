@@ -1,0 +1,6 @@
+USE Qtos;
+
+CREATE TABLE PARAMETERS(
+	id_input INT AUTO_INCREMENT NOT NULL,
+    
+);
