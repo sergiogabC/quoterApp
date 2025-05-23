@@ -1,0 +1,21 @@
+{
+  "name": "quoterapp",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergiogabC/quoterApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergiogabC/quoterApp/issues"
+  },
+  "homepage": "https://github.com/sergiogabC/quoterApp#readme",
+  "description": ""
+}
