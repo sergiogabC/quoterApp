@@ -1,5 +1,4 @@
-import express, { json } from "express";
-import  from 
+const express = require("express");
 
 const PORT = process.env.PORT ?? 1234;
 const app = express();
