@@ -2,10 +2,10 @@
   "name": "quoterapp",
   "version": "1.0.0",
   "main": "app.js",
-  
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --watch app2.js"
+    "start": "node --watch app.js"
   },
   "repository": {
     "type": "git",
