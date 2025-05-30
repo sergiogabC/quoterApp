@@ -15,6 +15,17 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "view/indextp.html"));
 });
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.post("/parametros", (req, res) => {
+  const client = req.body.client;
+  const country = req.body.country;
+  console.log("Client: ", client);
+  console.log("Country: ", country);
+  res.sendFile(path.join(__dirname, "view/quoter.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on port http://localhost:${PORT}`);
 });
