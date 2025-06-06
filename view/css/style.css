@@ -39,8 +39,7 @@ button{
 }
 
 input{
-  width: fit-content;
-  display: block;
+  width: inherit;
 }
 
 .buttoEnviar{
@@ -68,7 +67,9 @@ input{
 }
 
 .cardInput{
-  width: initial;
+  min-width: 5rem;
+  max-width: 8rem;
+  width: fit-content;
   overflow: hidden;
   height: 6rem;
   display: flex;
@@ -78,19 +79,16 @@ input{
 }
 
 .cardInputHead{
-  width: fit-content;
-  min-width: 5rem;
-  max-width: 8rem;
+  flex-basis: auto;
   padding: 0.5rem 1rem;
   background-color: #BDD7EE;
-  display: inline-block;
-  flex-basis: calc(1/2 * 100%);
+  display: flex;
   text-align: center;
 }
 
 .cardInputData{
-  flex-basis: calc(1/2 * 100%);
-  width: inherit;
+  display: flex;
+  flex-basis: auto;
 }
 
 .buttonMas{
