@@ -18,7 +18,7 @@ export class LogicController {
     const country = req.body.country;
     console.log("Client: ", client);
     console.log("Country: ", country);
-    res.sendFile(path.join(__dirname, "../view/quoter.ejs"));
+    res.render("../view/quoter");
   }
 
   static async paramsShow(req, res) {
