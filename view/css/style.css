@@ -15,40 +15,50 @@ body {
 
 table tr td{
   border: 1px solid #c9c8c8;
-  border-collapse: collapse;
 }
 
 table tr th{
-  font-size: 1.1rem;
-  font-weight: 600;
   border: 1px solid #D1F8EF;
 }
 
 strong{
+  display: flex;
   font-size: 1rem;
   font-weight: 600;
   text-align: center;
-  display: inline-block;
-  width: fit-content;
+  align-items: center;
+  justify-content: center;
 }
 
 button{
   display: inline-block;
   width: 100%;
   text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 input{
-  width: inherit;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.buttoEnviar{
+.buttonEnviar{
   width: 5rem;
   height: 3rem;
   background-color: #BDD7EE;
   display: flex;
   border: solid 1px #D9D9D9;
   border-radius: 15px;
+}
+.button{
+  width: auto;
+  background-color: #BDD7EE;
+  display: inline-block;
+  border: solid 1px #D9D9D9;
+  border-radius: 15px;
+  text-align: center;
+  padding: 0.5rem 1rem;
 }
 
 .bodyHome{
@@ -66,29 +76,26 @@ input{
   padding-left: 5px;
 }
 
-.cardInput{
-  min-width: 5rem;
-  max-width: 8rem;
-  width: fit-content;
-  overflow: hidden;
-  height: 6rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: solid 1px #D9D9D9;
-}
-
 .cardInputHead{
-  flex-basis: auto;
+  min-width: 5rem;
+  max-width: 7.5rem;
+  width: auto;
   padding: 0.5rem 1rem;
+  box-sizing: border-box;
   background-color: #BDD7EE;
-  display: flex;
   text-align: center;
 }
 
 .cardInputData{
-  display: flex;
   flex-basis: auto;
+  min-width: 5rem;
+  max-width: 7rem;
+  width: auto;
+  box-sizing: border-box;
+}
+
+.tdBoton{
+  border: none;
 }
 
 .buttonMas{

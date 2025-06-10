@@ -10,20 +10,22 @@
 </head>
 <body>
 
-    <div class="flex p-2">
-        <form class="flex flex-col " action="/parametros" method="POST" id="formParametros">
-            <div class="flex basis-1/5">                
+    <div class="flex flex-col p-2">
+        <form action="/parametros" method="POST" id="formParametros">
+            <div class="flex basis-1/5 items-center">   
+                <div class="button">
+                    <button id="MostrarParametros" type="button">Mostrar Parametros</button>
+                </div>                
+                <!-- include("inputsParameters/tablaParametros") -->
             </div>
-            <div class="flex flex-col basis-4/5 items-center ">
-                <div class= "flex flex-col ">                    
-                    <%- include("inputsParameters/filaParametros") %>
-                </div>    
-                <div  class="buttoEnviar basis-1/4">
-                    <button type="submit" form="formParametros" class="roboto-uniquifier">Enviar</button>
+            <div class="flex flex-col basis-4/5 items-center">
+                <%- include("inputsParameters/filaParametros") %>
+                <div  class="buttonEnviar">
+                    <button type="submit" form="formParametros">Enviar</button>
                 </div>
             </div>            
         </form>
     </div>
-
+    <script src="./js/main.js"></script>
 </body>
 </html>
