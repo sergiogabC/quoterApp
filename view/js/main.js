@@ -1,6 +1,11 @@
 // Mostrar Parametros(renderizar el include)
-const btnMostrarParametros = document.getElementById("MostrarParametros");
+document.addEventListener("DOMContentLoaded", () => {
+  const btnMostrarParametros = document.getElementById("mostrarParametros");
+  const tableVisible = document.getElementById("tabla");
 
-btnMostrarParametros.addEventListener("click", (e) => {
-  console.log("2");
+  btnMostrarParametros.addEventListener("click", () => {
+    const visible = tableVisible.style.display === "table";
+    tableVisible.style.display = visible ? "none" : "table";
+    btnMostrarParametros.innerText = "Ocultar Parametros";
+  });
 });

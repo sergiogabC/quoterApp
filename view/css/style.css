@@ -43,6 +43,10 @@ input{
   box-sizing: border-box;
 }
 
+.table-visible{
+  display: none;
+}
+
 .buttonEnviar{
   width: 5rem;
   height: 3rem;
