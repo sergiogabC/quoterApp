@@ -5,7 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btnMostrarParametros.addEventListener("click", () => {
     const visible = tableVisible.style.display === "table";
-    tableVisible.style.display = visible ? "none" : "table";
-    btnMostrarParametros.innerText = "Ocultar Parametros";
+
+    if (tableVisible.style.display === "table") {
+      tableVisible.style.display = "none";
+      btnMostrarParametros.innerText = "Mostrar Parametros";
+    } else {
+      tableVisible.style.display = "table";
+      btnMostrarParametros.innerText = "Ocultar Parametros";
+    }
   });
 });

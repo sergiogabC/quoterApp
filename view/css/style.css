@@ -5,6 +5,19 @@
   font-style: normal;
   font-variation-settings:"wdth" 100;
 }
+
+/* Chrome, Safari, Edge, Opera */
+.inputNumber::-webkit-outer-spin-button,
+.inputNumber::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.inputNumber {
+  -moz-appearance: textfield;
+}
+
 body {  
   background-size: cover;
   background-attachment: fixed;
