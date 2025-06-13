@@ -1,4 +1,5 @@
-<table class="table-auto table-visible" id="tabla">
+<div class="flex items-center justify-center">
+<table class="table-auto table-visible ml-30" id="tabla">
   <thead>
     <tr>
       <th colspan="2" class="headerTableInput border">
@@ -11,94 +12,95 @@
   <tbody>
     <tr>
       <th class="headTableInput">Cliente:</th>
-      <td class=""><input type="text" name="client" id="client" /></td>
+      <td class=""><input required type="text" name="client" id="client" /></td>
     </tr>
     <tr>
       <th class="headTableInput">País:</th>
-      <td class=""><input type="text" name="country" id="country" /></td>
+      <td class=""><input required type="text" name="country" id="country" /></td>
     </tr>
     <tr>
       <th class="headTableInput">Gerente de propuestas:</th>
       <td class="">
-        <input type="text" name="proposalManager" id="proposalManager" />
+        <input required type="text" name="proposalManager" id="proposalManager" />
       </td>
     </tr>
     <tr>
       <th class="headTableInput">HUGUES T19 Número de Sitios:</th>
-      <td class=""><input type="number" class="inputNumber" name="ht19NumberSites" id="ht19NumberSites" /></td>
+      <td class=""><input required type="number" class="inputNumber" name="ht19NumberSites" id="ht19NumberSites" /></td>
     </tr>
     <tr>
       <th class="headTableInput">Sitios Fuera de Cobertura:</th>
-      <td class=""><input type="number" class="inputNumber" name="sitesOutCoverage" id="sitesOutCoverage"/></td>
+      <td class=""><input required type="number" class="inputNumber" name="sitesOutCoverage" id="sitesOutCoverage"/></td>
     </tr>
     <tr>
       <th class="headTableInput">Número de Sitios:</th>
-      <td class=""><input type="number" class="inputNumber" name="numSites" id="numSites" /></td>
+      <td class=""><input required type="number" class="inputNumber" name="numSites" id="numSites" /></td>
     </tr>
     <tr>
       <th class="headTableInput">Repuestos Remotos:</th>
-      <td class=""><input type="number" class="inputNumber" name="remoteSpares" id="remoteSpares" /></td>
+      <td class=""><input required type="number" class="inputNumber" name="remoteSpares" id="remoteSpares" /></td>
     </tr>
     <tr>
       <th class="headTableInput">Total de Repuestos:</th>
-      <td class=""><input type="number" class="inputNumber" name="totalOfSpares" id="totalOfSpares" /></td>
+      <td class=""><input required type="number" class="inputNumber" name="totalOfSpares" id="totalOfSpares" /></td>
     </tr>
     <tr>
       <th class="headTableInput">Capacidad Total SES-17(Mbps):</th>
       <td class="">
-        <input type="number" class="inputNumber" name="capacitySes17" id="capacitySes17" />
+        <input required type="number" class="inputNumber" name="capacitySes17" id="capacitySes17" />
       </td>
     </tr>
     <tr>
       <th class="headTableInput">Overbooking:</th>
       <td class="">
-        <input type="number" class="inputNumber" name="Overbooking" id="Overbooking" />
+        <input required type="number" class="inputNumber" name="Overbooking" id="Overbooking" />
       </td>
     </tr>
     <tr>
       <th class="headTableInput">Capacidad total de banda Ka(Mbps):</th>
       <td class="">
-        <input type="number" class="inputNumber" name="cTotalBandaKa" id="cTotalBandaKa" />
+        <input required type="number" class="inputNumber" name="cTotalBandaKa" id="cTotalBandaKa" />
       </td>
     </tr>
     <tr>
       <th class="headTableInput">Mbps promedio por sitio:</th>
       <td class="">
-        <input type="number" class="inputNumber" name="mbpsProm" id="mbpsProm" />
+        <input required type="number" class="inputNumber" name="mbpsProm" id="mbpsProm" />
       </td>
     </tr>
     <tr>
       <th class="headTableInput">Valor Cambio(SOL a USD):</th>
-      <td class=""><input type="number" class="inputNumber" name="solDolar" id="solDolar" /></td>
+      <td class=""><input required type="number" class="inputNumber" name="solDolar" id="solDolar" /></td>
     </tr>
     <tr>
       <th class="headTableInput">
         Precio unitario terminal (USD) - ExWorks USA:
       </th>
       <td class="">
-        <input type="number" class="inputNumber" name="pUTExWorks" id="pUTExWorks" />
+        <input required type="number" class="inputNumber" name="pUTExWorks" id="pUTExWorks" />
       </td>
     </tr>
     <tr>
       <th class="headTableInput">COSTO - Banda Ka SES Mbps/Mes (USD):</th>
       <td class="">
-        <input type="number" class="inputNumber" name="costBandKaSes" id="costBandKaSes" />
+        <input required type="number" class="inputNumber" name="costBandKaSes" id="costBandKaSes" />
       </td>
     </tr>
     <tr>
       <th class="headTableInput">COSTO - HUGUES Banda Ka Mbps/Mes (USD):</th>
       <td class="">
-        <input type="number" class="inputNumber" name="costHBandKa" id="costHBandKa" />
+        <input required type="number" class="inputNumber" name="costHBandKa" id="costHBandKa" />
       </td>
     </tr>
     <tr>
       <th class="headTableInput">Contrato:</th>
-      <td class=""><input type="number" class="inputNumber" name="contract" id="contract" /></td>
+      <td class=""><input required type="number" class="inputNumber" name="contract" id="contract" /></td>
     </tr>
     <tr>
       <th class="headTableInput">% sitios con penalizaciones / mes:</th>
       <td class="">
         <input
+          required
           class="inputNumber"
           type="number"
           name="sitesPenalties"
@@ -110,6 +112,7 @@
       <th class="headTableInput">Tasa de financiamiento de CAPEX:</th>
       <td class="">
         <input
+          required
           class="inputNumber"
           type="number"
           name="rateFinancingCapex"
@@ -119,7 +122,8 @@
     </tr>
     <tr>
       <th class="headTableInput">UIT:</th>
-      <td class=""><input type="text" name="UIT" id="UIT" /></td>
+      <td class=""><input required type="text" name="UIT" id="UIT" /></td>
     </tr>
   </tbody>
 </table>
+</div>

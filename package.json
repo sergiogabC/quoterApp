@@ -20,8 +20,10 @@
   "homepage": "https://github.com/sergiogabC/quoterApp#readme",
   "description": "",
   "dependencies": {
+    "@tailwindcss/cli": "^4.1.10",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "tailwindcss": "^4.1.10",
     "zod": "^3.25.63"
   }
 }

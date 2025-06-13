@@ -1,5 +1,5 @@
 class ParameterPrimary {
-  constructor(name, country, proposalManager) {
+  constructor(name, country, proposalManager, discount) {
     this.name = name;
     this.country = country;
     this.proposalManager = proposalManager;
@@ -20,5 +20,8 @@ class ParameterPrimary {
     // this.sitesPenalties = sitesPenalties;
     // this.rateFinancingCapex = rateFinancingCapex;
     // this.uit = UIT;
+    this.discount = discount;
   }
+
+  priceUnit() {}
 }
