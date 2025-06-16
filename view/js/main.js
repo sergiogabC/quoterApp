@@ -3,15 +3,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnMostrarParametros = document.getElementById("mostrarParametros");
   const tableVisible = document.getElementById("tabla");
 
-  btnMostrarParametros.addEventListener("click", () => {
-    if (tableVisible.style.display === "table") {
-      tableVisible.style.display = "none";
-      btnMostrarParametros.innerText = "Mostrar Parametros";
-    } else {
-      tableVisible.style.display = "table";
-      btnMostrarParametros.innerText = "Ocultar Parametros";
-    }
-  });
+  if (btnMostrarParametros != null) {
+    btnMostrarParametros.addEventListener("click", () => {
+      if (tableVisible.style.display === "table") {
+        tableVisible.style.display = "none";
+        btnMostrarParametros.innerText = "Mostrar Parametros";
+      } else {
+        tableVisible.style.display = "table";
+        btnMostrarParametros.innerText = "Ocultar Parametros";
+      }
+    });
+  }
 });
 
 //AGREGAR FILAS
@@ -20,37 +22,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const tbodyRows = document.getElementById("tbodyRows");
   const innerTr = `<tr>
         <td class="cardInputData">
-          <input required type="text" name="Tipo" id="Tipo" />
+          <input required type="text" name="tipo" id="tipo" />
         </td>
         <td class="cardInputData">
-          <input required type="text" name="Categoria" id="Categoria" />
+          <input required type="text" name="categoria" id="categoria" />
         </td>
         <td class="cardInputData">
-          <input required type="text" name="Subcategoria" id="Subcategoria" />
+          <input required type="text" name="subcategoria" id="subcategoria" />
         </td>
         <td class="cardInputData">
-          <input required type="text" name="PiezaFabricante" id="PiezaFabricante" />
+          <input required type="text" name="piezaFabricante" id="piezaFabricante" />
         </td>
         <td class="cardInputData">
-          <input required type="text" name="CodigoProducto" id="CodigoProducto" />
+          <input required type="text" name="margen" id="margen" />
         </td>
         <td class="cardInputData">
-          <input required type="text" name="Descripcion" id="Descripcion" />
+          <input required type="text" name="codigoProducto" id="codigoProducto" />
         </td>
         <td class="cardInputData">
-          <input required type="number" class="inputNumber" name="Cantidad" id="Cantidad" />
+          <input required type="text" name="descripcion" id="descripcion" />
         </td>
         <td class="cardInputData">
-          <input required type="text" name="UnidadMedida" id="UnidadMedida" />
+          <input required type="number" class="inputNumber" name="cantidad" id="cantidad" />
         </td>
         <td class="cardInputData">
-          <input required type="number" class="inputNumber" name="Descuento" id="Descuento" />
+          <input required type="text" name="unidadMedida" id="unidadMedida" />
         </td>
         <td class="cardInputData">
-          <input required type="text" name="Financiamiento" id="Financiamiento" />
+          <input required type="number" class="inputNumber" name="descuento" id="descuento" />
         </td>
         <td class="cardInputData">
-          <input required type="text" name="Dueño" id="Dueño" />
+          <input required type="text" name="financiamiento" id="financiamiento" />
+        </td>
+        <td class="cardInputData">
+          <input required type="text" name="dueño" id="dueño" />
         </td>
         <td class="tdBoton">
           <div class="buttonMenos">
@@ -59,19 +64,23 @@ document.addEventListener("DOMContentLoaded", () => {
         </td>
       </tr>`;
 
-  btnMas.addEventListener("click", () => {
-    tbodyRows.insertAdjacentHTML("beforeend", innerTr);
-  });
+  if (btnMas != null) {
+    btnMas.addEventListener("click", () => {
+      tbodyRows.insertAdjacentHTML("beforeend", innerTr);
+    });
+  }
 });
 
 //Eliminar Filas
 document.addEventListener("DOMContentLoaded", () => {
   const tabla = document.getElementById("tableRows");
 
-  tabla.addEventListener("click", (e) => {
-    if (e.target && e.target.classList.contains("tdMenos")) {
-      const fila = e.target.closest("tr");
-      fila.remove();
-    }
-  });
+  if (tabla != null) {
+    tabla.addEventListener("click", (e) => {
+      if (e.target && e.target.classList.contains("tdMenos")) {
+        const fila = e.target.closest("tr");
+        fila.remove();
+      }
+    });
+  }
 });

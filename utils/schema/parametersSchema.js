@@ -1,6 +1,6 @@
 import { object as _object, string, number, object } from "zod/v4";
 
-const parameters = _object({
+const parametersP = _object({
   client: string(),
   country: string(),
   proposalManager: string(),
@@ -24,5 +24,13 @@ const parameters = _object({
 });
 
 export function validateParametersPrimary(object) {
-  return parameters.safeParse(object);
+  return parametersP.safeParse(object);
+}
+
+const parametersS = _object({
+  piezaFabricante: string(),
+});
+
+export function validateParameterSecundary(object) {
+  return parametersS.safeParse(object);
 }

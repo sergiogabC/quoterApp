@@ -1,6 +1,6 @@
-class ParameterPrimary {
-  constructor(name, country, proposalManager, discount) {
-    this.name = name;
+export class ParametersPrimary {
+  constructor(client, country, proposalManager) {
+    this.client = client;
     this.country = country;
     this.proposalManager = proposalManager;
     // this.ht19NumberSites = ht19NumberSites;
@@ -20,8 +20,12 @@ class ParameterPrimary {
     // this.sitesPenalties = sitesPenalties;
     // this.rateFinancingCapex = rateFinancingCapex;
     // this.uit = UIT;
-    this.discount = discount;
+    //this.discount = discount;
   }
 
-  priceUnit() {}
+  mostrarUsuario() {
+    console.log("El Cliente es: " + this.client);
+    console.log("El país es: " + this.country);
+    console.log("El gerente de propuestas es: " + this.proposalManager);
+  }
 }
