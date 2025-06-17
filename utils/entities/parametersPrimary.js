@@ -1,8 +1,8 @@
 export class ParametersPrimary {
-  constructor(client, country, proposalManager) {
-    this.client = client;
-    this.country = country;
-    this.proposalManager = proposalManager;
+  constructor(contract) {
+    // this.client = client;
+    // this.country = country;
+    // this.proposalManager = proposalManager;
     // this.ht19NumberSites = ht19NumberSites;
     // this.sitesOutCoverage = sitesOutCoverage;
     // this.numSites = numSites;
@@ -16,7 +16,7 @@ export class ParametersPrimary {
     // this.pUTExWorks = pUTExWorks;
     // this.costBandKaSes = costBandKaSes;
     // this.costHBandKa = costHBandKa;
-    // this.contract = contract;
+    this.contract = contract;
     // this.sitesPenalties = sitesPenalties;
     // this.rateFinancingCapex = rateFinancingCapex;
     // this.uit = UIT;

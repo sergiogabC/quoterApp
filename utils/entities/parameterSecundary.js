@@ -1,6 +1,9 @@
 export class ParametersSecundary {
-  constructor(piezaFabricante) {
-    this.materialNumber = piezaFabricante;
+  constructor(piezaFabricante, margen) {
+    // (this.tipo = tipo),
+    (this.materialNumber = piezaFabricante), (this.margin = margen);
+    // (this.cantidad = cantidad),
+    // (this.descuento = descuento);
   }
 
   mostrarMaterial() {

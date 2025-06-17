@@ -20,14 +20,10 @@ export class LogicController {
   }
 
   static async params(req, res) {
-    //const paramsResultP = validateParametersPrimary(req.body);
+    const paramsResultP = validateParametersPrimary(req.body);
     const paramsResultS = validateParameterSecundary(req.body);
 
-    // const parameterP = new ParametersPrimary(
-    //   paramsResultP.data.client,
-    //   paramsResultP.data.country,
-    //   paramsResultP.data.proposalManager
-    // );
+    const parameterP = new ParametersPrimary(paramsResultP.data.contract);
 
     const parameterS = new ParametersSecundary(
       paramsResultS.data.piezaFabricante
@@ -49,7 +45,10 @@ export class LogicController {
       materialData.cost
     );
 
-    const unitPrice = Operations.priceUnit(materialObject.cost, 0.7);
+    const unitPrice = Operations.priceUnit(
+      materialObject.cost,
+      parameterS.margin
+    );
 
     console.log("El costo es: " + materialObject.cost);
     console.log("El precio unitario es: " + unitPrice);
