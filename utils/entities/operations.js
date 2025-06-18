@@ -5,9 +5,9 @@ export class Operations {
   }
 
   static unitPrice(unitCost, marg) {
-    const margin = "0." + toString(100 - marg);
-    parseFloat(margin);
-    console.log(margin + "y su tipo: " + margin.valueOf());
+    const margin = (100 - marg) / 100;
+    console.log(marg);
+    console.log(margin);
     const unitPrice = unitCost / margin;
     return unitPrice;
   }

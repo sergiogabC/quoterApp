@@ -1,4 +1,4 @@
-export class ParametersPrimary {
+export class ParametersPri {
   constructor(contract) {
     // this.client = client;
     // this.country = country;
@@ -23,9 +23,13 @@ export class ParametersPrimary {
     //this.discount = discount;
   }
 
-  mostrarUsuario() {
-    console.log("El Cliente es: " + this.client);
-    console.log("El país es: " + this.country);
-    console.log("El gerente de propuestas es: " + this.proposalManager);
+  // mostrarUsuario() {
+  //   console.log("El Cliente es: " + this.client);
+  //   console.log("El país es: " + this.country);
+  //   console.log("El gerente de propuestas es: " + this.proposalManager);
+  // }
+
+  mostrarContract() {
+    console.log("contract: " + this.contract);
   }
 }

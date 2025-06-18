@@ -1,12 +1,12 @@
 export class ParametersSecundary {
-  constructor(piezaFabricante, margen) {
+  constructor(manufacturerPart, margin) {
     // (this.tipo = tipo),
-    (this.materialNumber = piezaFabricante), (this.margin = margen);
+    (this.manufacturerPart = manufacturerPart), (this.margin = margin);
     // (this.cantidad = cantidad),
     // (this.descuento = descuento);
   }
 
   mostrarMaterial() {
-    console.log("El material es:" + this.materialNumber);
+    console.log("El material es:" + this.manufacturerPart);
   }
 }
