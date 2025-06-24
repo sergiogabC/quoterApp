@@ -1,0 +1,77 @@
+
+<div>
+  <table class="table-auto border-collapse w-full min-w-max" id="tableRows">
+    <thead>
+      <tr>
+        <th class="p-2 bg-[#BDD7EE]"><strong>*</strong></th>
+        <th class="cardInputHead"><strong>Tipo</strong></th>
+        <th class="cardInputHead"><strong>Categoría</strong></th>
+        <th class="cardInputHead"><strong>Subcategoría</strong></th>
+        <th class="cardInputHead"><strong>Pieza del Fabricante</strong></th>
+        <th class="cardInputHead"><strong>Margen</strong></th>
+        <th class="cardInputHead"><strong>Codigo Producto</strong></th>
+        <th class="cardInputHead"><strong>Descripción</strong></th>
+        <th class="cardInputHead"><strong>Cantidad</strong></th>
+        <th class="cardInputHead"><strong>Unidad de Medida</strong></th>
+        <th class="cardInputHead"><strong>Descuento</strong></th>
+        <th class="cardInputHead"><strong>Financiamiento</strong></th>
+        <th class="cardInputHead"><strong>Dueño</strong></th>
+      </tr>
+    </thead>
+    <tbody id="tbodyRows">
+      <tr class="rowData">
+        <td class="inputSelect">
+          <div>
+            <strong class="iden">1</strong>
+          </div>
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required type="text" name="type" id="type" class="inputData"/>
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required type="text" name="categoria" id="category" class="inputData"/>
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required type="text" name="subcategoria" id="subcategory" class="inputData"/>
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required  type="text" name="manufacturerPart" id="manufacturerPart" class="inputData"/>
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required  class="inputNumber inputData" type="number" name="margin" id="margin" />
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required type="text" name="productCode" id="productCode" class="inputData"/>
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required type="text" name="description" id="description" class="inputData"/>
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required type="number" class="inputNumber inputData" name="qty" id="qty" class="inputData"/>
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required type="text" name="unitMeasure" id="unitMeasure" class="inputData"/>
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required type="number" min="0" class="inputNumber inputData" name="discount" id="discount" />
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required type="text" name="finance" id="finance" class="inputData"/>
+        </td>
+        <td class="cardInputData inputSelect">
+          <input required type="text" name="owner" id="owner" class="inputData"/>
+        </td>
+        <td class="tdBoton" id="tdBoton">                    
+          <button class="buttonMenos" type="button" form="">-</button>          
+        </td>
+      </tr>
+    </tbody>    
+  </table>
+  <div>
+    
+      <button class="buttonMas" type="button" id="tdMas">+</button>
+    
+  </div>
+</div>
+
+

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --watch app.js",
-    "tailwind": "npx @tailwindcss/cli -i ./view/css/input.css -o ./view/css/output.css --watch"
+    "tailwindcss": "npx @tailwindcss/cli -i ./views/css/input.css -o ./views/css/output.css --watch"
   },
   "repository": {
     "type": "git",

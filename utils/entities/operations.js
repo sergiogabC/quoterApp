@@ -1,4 +1,5 @@
 export class Operations {
+
   static unitCost({ object }) {
     const unitCost = object.cost;
     return unitCost;
@@ -6,8 +7,6 @@ export class Operations {
 
   static unitPrice(unitCost, marg) {
     const margin = (100 - marg) / 100;
-    console.log(marg);
-    console.log(margin);
     const unitPrice = unitCost / margin;
     return unitPrice;
   }
@@ -19,11 +18,11 @@ export class Operations {
 
   static extDiscPrice(tipo, qty, unitDiscPrice, contract) {
     if (tipo === "opex") {
-      const extCost = contract * unitDiscPrice * qty;
-      return extCost;
+      const extDiscPrice = contract * unitDiscPrice * qty;
+      return extDiscPrice;
     }
-    const extCost = unitDiscPrice * qty;
-    return extCost;
+    const extDiscPrice = unitDiscPrice * qty;
+    return extDiscPrice;
   }
 
   static extCost(tipo, qty, unitCost, contract) {
@@ -47,6 +46,7 @@ export class Operations {
 
   static monthlyPriceMbps(extDiscPrice, cTotalBandaKa, contract) {
     const monthlyPriceMbps = extDiscPrice / cTotalBandaKa / contract;
+
     return monthlyPriceMbps;
   }
 

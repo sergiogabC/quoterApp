@@ -5,7 +5,7 @@ import { qRoutes } from "./routes/qRoutes.js";
 const PORT = process.env.PORT ?? 1234;
 const app = express();
 
-app.use(express.static("view"));
+app.use(express.static("views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

@@ -29,7 +29,7 @@ body {
 }
 
 table tr td{
-  border: 1px solid #c9c8c8;
+  border: 1px solid #D9D9D9;
 }
 
 table tr th{
@@ -56,6 +56,9 @@ button{
 input{
   width: 100%;
   box-sizing: border-box;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .table-visible{
@@ -111,6 +114,31 @@ input{
   max-width: 6.5rem;
   width: auto;
   box-sizing: border-box;
+  
+}
+
+.cardResultHead{
+  min-width: 4rem;
+  max-width: 6.5rem;
+  width: auto;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  background-color: #F8CBAD;
+  border-color: #D9D9D9;
+  text-align: center;
+}
+
+.cardResultData{
+  flex-basis: auto;
+  min-width: 4rem;
+  max-width: 6.5rem;
+  width: auto;
+  box-sizing: border-box;
+  border-color: #D9D9D9
+}
+
+.trActive{
+  border: 2px solid #84bcf7 !important
 }
 
 .tdBoton{
@@ -129,20 +157,28 @@ input{
   justify-content: center;
   line-height: 0px;
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
+  font-weight: lighter;
 }
 
 .buttonMenos{
   width: 30px;
-  height: 30px;
+  height: 20px;
+  margin: 0px 2px;
   background-color: #C00000;
   color: white;
   font-size: 2rem;
-  border-radius: 50%;
+  border-radius: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 0px;
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
+  font-weight: lighter;
+}
+
+.buttonResultado{
+  background-color: #F8CBAD;
+  width: 1rem;
+  height: 3rem;
+  color: white;
 }

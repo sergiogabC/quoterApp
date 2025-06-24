@@ -1,5 +1,3 @@
-import { fileURLToPath } from "url";
-import path from "path";
 import {
   validateParameterSecundary,
   validateParametersPrimary,
@@ -7,22 +5,21 @@ import {
 import { MaterialModel } from "../models/json/materialsModel.js";
 import { Operations } from "../utils/entities/operations.js";
 import { Material } from "../utils/entities/material.js";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { Results } from "../utils/entities/results.js";
 
 export class LogicController {
+
   static async home(req, res) {
-    console.log(__dirname);
-    res.render("../view/index");
+    res.render("index");
+  }
+
+  static async paramsShow(req, res) {
+    res.render("quoter");
   }
 
   static async params(req, res) {
     const paramsResultP = validateParametersPrimary(req.body);
     const paramsResultS = validateParameterSecundary(req.body);
-
-    console.log(typeof paramsResultS.data.margin);
-    console.log(paramsResultS);
 
     const materialData = await MaterialModel.getMaterial(
       paramsResultS.data.manufacturerPart
@@ -103,6 +100,12 @@ export class LogicController {
       paramsResultP.data.numSites
     );
 
+    const result = new Results(materialObject.cost,unitPrice,unitDiscPrice,
+                              extDiscPrice,
+                              extCost,monthlyPriceSite,monthlyCostSite,
+                              monthlyPriceMbps,monthlyCostMbps,financedCapex,
+                              financedMonthlyPriceSite)
+
     console.log("El costo es: " + materialObject.cost);
     console.log("El precio unitario es: " + unitPrice);
     console.log("El precio unitario con descuento es: " + unitDiscPrice);
@@ -117,10 +120,11 @@ export class LogicController {
       "El precio por sitio mensual financiado es: " + financedMonthlyPriceSite
     );
 
-    res.render("../view/quoter");
+    res.render("inputsParameters/result", {res: result});
   }
 
-  static async paramsShow(req, res) {
-    res.render("../view/quoter");
+  static async resultShow(req,res){
+    res.render("inputsParameters/result",{res:""});
   }
+
 }

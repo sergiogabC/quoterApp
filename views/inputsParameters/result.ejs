@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/output.css">
+    <title>Document</title>
+</head>
+<body>
+  <table class="table-auto border-collapse w-full min-w-max" id="tableRows">
+    <thead>
+      <tr>
+        <th class="p-2 bg-[#F8CBAD]"><strong>*</strong></th>
+        <th class="cardResultHead"><strong>Costo Unit.</strong></th>
+        <th class="cardResultHead"><strong>Costo Ext.</strong></th>
+        <th class="cardResultHead"><strong>Precio Unit.</strong></th>
+        <th class="cardResultHead"><strong>Precio con Desc. Unit.</strong></th>
+        <th class="cardResultHead"><strong>Precio con Desc. Ext.</strong></th>
+        <th class="cardResultHead"><strong>Costo x Sitio Mens.</strong></th>
+        <th class="cardResultHead"><strong>Precio x Sitio Mens.</strong></th>
+        <th class="cardResultHead"><strong>Costo x Mbps Mens.</strong></th>
+        <th class="cardResultHead"><strong>Precio x Mbps Mens.</strong></th>
+        <th class="cardResultHead"><strong>Capex Financiando</strong></th>
+        <th class="cardResultHead"><strong>Precio Mens. Fin. x Sitio</strong></th>
+      </tr>
+    </thead>
+    <tbody id="tbodyRows">
+      <tr>
+        <td>
+          <div>
+            <strong>1</strong>
+          </div>
+        </td>
+
+        <td class="cardResultData">
+          <strong> <%= res.cost %> </strong>
+        </td>
+        <td class="cardResultData">
+          <strong> <%= res.extCost %> </strong>
+        </td>
+        <td class="cardResultData">
+          <strong> <%= res.unitPrice %> </strong>
+        </td>
+        <td class="cardResultData">
+          <strong> <%= res.unitDiscPrice %> </strong>
+        </td>
+        <td class="cardResultData">
+          <strong> <%= res.extDiscPrice %> </strong>
+        </td>
+        <td class="cardResultData">
+          <strong> <%= res.monthlyCostSite %> </strong>
+        </td>
+        <td class="cardResultData">
+          <strong> <%= res.monthlyPriceSite %> </strong>
+        </td>
+        <td class="cardResultData">
+          <strong> <%= res.monthlyCostMbps %> </strong>
+        </td>
+        <td class="cardResultData">
+          <strong> <%= res.monthlyPriceMbps %> </strong>
+        </td>
+        <td class="cardResultData">
+          <strong> <%= res.financedCapex %> </strong>
+        </td>
+        <td class="cardResultData">
+          <strong> <%= res.financedMonthlyPriceSite %> </strong>
+        </td>
+
+        
+      </tr>
+    </tbody>    
+  </table>    
+</body>
+</html>
+
