@@ -1,14 +1,5 @@
 import { object, string, number, preprocess } from "zod/v4";
 
-// const stringToNumber = () => {
-//   preprocess((val) => {
-//     if (typeof val === "string") {
-//       return Number.parseInt(val);
-//     }
-//     return val;
-//   });
-// };
-
 const parametersP = object({
   // client: string(),
   // country: string(),

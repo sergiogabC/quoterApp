@@ -4,11 +4,9 @@ import {
 } from "../utils/schema/parametersSchema.js";
 import { MaterialModel } from "../models/json/materialsModel.js";
 import { Operations } from "../utils/entities/operations.js";
-import { Material } from "../utils/entities/material.js";
 import { Results } from "../utils/entities/results.js";
 
 export class LogicController {
-
   static async home(req, res) {
     res.render("index");
   }
@@ -25,18 +23,8 @@ export class LogicController {
       paramsResultS.data.manufacturerPart
     );
 
-    const materialObject = new Material(
-      materialData.material_number,
-      materialData.description,
-      materialData.profit_center,
-      materialData.costing_date,
-      materialData.material_cost,
-      materialData.pls,
-      materialData.cost
-    );
-
     const unitPrice = Operations.unitPrice(
-      materialObject.cost,
+      materialData.cost,
       paramsResultS.data.margin
     );
 
@@ -55,7 +43,7 @@ export class LogicController {
     const extCost = Operations.extCost(
       paramsResultS.data.type,
       paramsResultS.data.qty,
-      materialObject.cost,
+      materialData.cost,
       paramsResultP.data.contract
     );
 
@@ -100,13 +88,21 @@ export class LogicController {
       paramsResultP.data.numSites
     );
 
-    const result = new Results(materialObject.cost,unitPrice,unitDiscPrice,
-                              extDiscPrice,
-                              extCost,monthlyPriceSite,monthlyCostSite,
-                              monthlyPriceMbps,monthlyCostMbps,financedCapex,
-                              financedMonthlyPriceSite)
+    const result = new Results(
+      materialData.cost,
+      unitPrice,
+      unitDiscPrice,
+      extDiscPrice,
+      extCost,
+      monthlyPriceSite,
+      monthlyCostSite,
+      monthlyPriceMbps,
+      monthlyCostMbps,
+      financedCapex,
+      financedMonthlyPriceSite
+    );
 
-    console.log("El costo es: " + materialObject.cost);
+    console.log("El costo es: " + materialData.cost);
     console.log("El precio unitario es: " + unitPrice);
     console.log("El precio unitario con descuento es: " + unitDiscPrice);
     console.log("El precio de descuento extendido es: " + extDiscPrice);
@@ -120,11 +116,10 @@ export class LogicController {
       "El precio por sitio mensual financiado es: " + financedMonthlyPriceSite
     );
 
-    res.render("inputsParameters/result", {res: result});
+    res.json(JSON.stringify(result));
   }
 
-  static async resultShow(req,res){
-    res.render("inputsParameters/result",{res:""});
+  static async resultShow(req, res) {
+    res.render("inputsParameters/result", { res: "" });
   }
-
 }
