@@ -1,4 +1,5 @@
 import {
+  validateManu,
   validateParameterSecundary,
   validateParametersPrimary,
 } from "../utils/schema/parametersSchema.js";
@@ -19,9 +20,15 @@ export class LogicController {
     const paramsResultP = validateParametersPrimary(req.body);
     const paramsResultS = validateParameterSecundary(req.body);
 
+    console.log("Datos req.body: ", req.body);
+    console.log("Datos con parse P:", paramsResultP);
+    console.log("Datos con parse S: ", paramsResultS);
+
     const materialData = await MaterialModel.getMaterial(
       paramsResultS.data.manufacturerPart
     );
+
+    console.log(materialData);
 
     const unitPrice = Operations.unitPrice(
       materialData.cost,
@@ -102,21 +109,9 @@ export class LogicController {
       financedMonthlyPriceSite
     );
 
-    console.log("El costo es: " + materialData.cost);
-    console.log("El precio unitario es: " + unitPrice);
-    console.log("El precio unitario con descuento es: " + unitDiscPrice);
-    console.log("El precio de descuento extendido es: " + extDiscPrice);
-    console.log("El costo extendido es: " + extCost);
-    console.log("El precio por sitio mensual es: " + monthlyPriceSite);
-    console.log("El costo por sitio mensual es: " + monthlyCostSite);
-    console.log("El precio mensual por mbps es: " + monthlyPriceMbps);
-    console.log("El costo mensual por mbps es: " + monthlyCostMbps);
-    console.log("El capex financiado es: " + financedCapex);
-    console.log(
-      "El precio por sitio mensual financiado es: " + financedMonthlyPriceSite
-    );
+    console.log(result);
 
-    res.json(JSON.stringify(result));
+    return res.json({ not: "" });
   }
 
   static async resultShow(req, res) {

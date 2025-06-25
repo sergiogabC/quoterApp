@@ -1,10 +1,4 @@
 export class Operations {
-
-  static unitCost({ object }) {
-    const unitCost = object.cost;
-    return unitCost;
-  }
-
   static unitPrice(unitCost, marg) {
     const margin = (100 - marg) / 100;
     const unitPrice = unitCost / margin;
@@ -17,21 +11,37 @@ export class Operations {
   }
 
   static extDiscPrice(tipo, qty, unitDiscPrice, contract) {
-    if (tipo === "opex") {
+    if (tipo === "") {
+      console.log("No se a especificado el tipo");
+      return "";
+    }
+    if (tipo === "OPEX") {
       const extDiscPrice = contract * unitDiscPrice * qty;
       return extDiscPrice;
     }
-    const extDiscPrice = unitDiscPrice * qty;
-    return extDiscPrice;
+    if (tipo === "CAPEX") {
+      const extDiscPrice = unitDiscPrice * qty;
+      return extDiscPrice;
+    }
+
+    return 0;
   }
 
   static extCost(tipo, qty, unitCost, contract) {
-    if (tipo === "opex") {
+    if (tipo === "") {
+      console.log("No se a especificado el tipo");
+      return "";
+    }
+    if (tipo === "OPEX") {
       const extCost = contract * unitCost * qty;
       return extCost;
     }
-    const extCost = unitCost * qty;
-    return extCost;
+    if (tipo === "CAPEX") {
+      const extCost = unitCost * qty;
+      return extCost;
+    }
+
+    return 0;
   }
 
   static monthlyPriceSite(extDiscPrice, numSites, contract) {
@@ -62,7 +72,11 @@ export class Operations {
     contract,
     extDiscPrice
   ) {
-    if (type === "capex" && finance === "mrc") {
+    if (tipo === "" || finance === "") {
+      console.log("No se a especificado el tipo o el finance");
+      return "";
+    }
+    if (type === "CAPEX" && finance === "MRC") {
       const paymentPeriod = rateFinancingCapex / 12;
       const financedCapex =
         (extDiscPrice * rateFinancingCapex) /
@@ -80,7 +94,10 @@ export class Operations {
     extDiscPrice,
     numSites
   ) {
-    if (type === "capex" && finance === "capex") {
+    if (tipo === "" || finance === "") {
+      return "No se a especificado el tipo o el finance";
+    }
+    if (type === "CAPEX" && finance === "CAPEX") {
       const paymentPeriod = rateFinancingCapex / 12;
       const financedCapex =
         (extDiscPrice * rateFinancingCapex) /
@@ -89,7 +106,7 @@ export class Operations {
       return finalValue;
     }
 
-    if (type === "opex") {
+    if (type === "OPEX") {
       const finalValue = extDiscPrice / numSites / contract;
       return finalValue;
     }

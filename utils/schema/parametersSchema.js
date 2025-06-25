@@ -1,28 +1,42 @@
-import { object, string, number, preprocess } from "zod/v4";
+import { z } from "zod/v4";
 
-const parametersP = object({
+const parametersP = z.object({
   // client: string(),
   // country: string(),
   // proposalManager: string(),
   // ht19NumberSites: preprocess((val) => Number(val), number()),
   // sitesOutCoverage: preprocess((val) => Number(val), number().min(0)),
-  numSites: preprocess((val) => Number(val), number().min(0)),
+
+  numSites: z.preprocess((val) => {
+    if (val === "" || val === null || typeof val === "undefined") return 1;
+    return Number(val);
+  }, z.number().min(0, "El número de sitios debe ser mayor a 0")),
+
   // remoteSpares: preprocess((val) => Number(val), number().min(0).max(100)),
   // totalOfSpares: preprocess((val) => Number(val), number()),
   // capacitySes17: preprocess((val) => Number(val), number()),
   // overbooking: preprocess((val) => Number(val), number().min(0).max(100)),
-  cTotalBandaKa: preprocess((val) => Number(val), number()),
+
+  cTotalBandaKa: z.preprocess((val) => {
+    if (val === "" || val === null || typeof val === "undefined") return 0;
+    return Number(val);
+  }, z.number()),
+
   // mbpsProm: preprocess((val) => Number(val), number()),
   // solDolar: preprocess((val) => Number(val), number()),
   // pUTExWorks: preprocess((val) => Number(val), number()),
   // costBandKaSes: preprocess((val) => Number(val), number()),
   // costHBandKa: preprocess((val) => Number(val), number()),
-  contract: preprocess((val) => Number(val), number().min(2)),
+  contract: z.preprocess((val) => {
+    if (val === "" || val === null || typeof val === "undefined") return 1;
+    return Number(val);
+  }, z.number()),
   // sitesPenalties: preprocess((val) => Number(val), number().min(0).max(100)),
-  rateFinancingCapex: preprocess(
-    (val) => Number(val),
-    number().min(0).max(100)
-  ),
+  rateFinancingCapex: z.preprocess((val) => {
+    if (val === "" || val === null || typeof val === "undefined") return 0;
+    return Number(val);
+  }, z.number().min(0, "El porcentaje no puede ser negativo").max(100, " El porcentaje no debe ser mayor a 100")),
+
   // uit: preprocess((val) => Number(val), number().positive()),
 });
 
@@ -30,14 +44,48 @@ export function validateParametersPrimary(object) {
   return parametersP.safeParse(object);
 }
 
-const parametersS = object({
-  type: string(),
-  manufacturerPart: string(),
-  margin: preprocess((val) => Number(val), number().min(0).max(100)),
-  qty: preprocess((val) => Number(val), number()),
-  discount: preprocess((val) => Number(val), number().min(0).max(100)),
-  finance: string(),
+const parametersS = z.object({
+  type: z.preprocess((val) => {
+    if (typeof val !== "string" || val.trim() === "") return "";
+    return val.trim().toUpperCase();
+  }, z.string()),
+
+  manufacturerPart: z.preprocess((val) => {
+    if (typeof val !== "string" || val.trim() === "") return "";
+    return val.trim();
+  }, z.string()),
+
+  margin: z.preprocess((val) => {
+    if (val === "" || val === null || typeof val === "undefined") return 0;
+    return Number(val);
+  }, z.number().min(0).max(100)),
+
+  qty: z.preprocess((val) => {
+    if (val === "" || val === null || typeof val === "undefined") return 0;
+    return Number(val);
+  }, z.number()),
+
+  discount: z.preprocess((val) => {
+    if (val === "" || val === null || typeof val === "undefined") return 0;
+    return Number(val);
+  }, z.number().min(0).max(100)),
+
+  finance: z.preprocess((val) => {
+    if (typeof val !== "string" || val.trim() === "") return "";
+    return val.trim().toUpperCase();
+  }, z.string()),
 });
+
+const manufacturerPartES = z.object({
+  manufacturerPart: z.preprocess((val) => {
+    if (typeof val !== "string" || val.trim() === "") return "";
+    return val.trim();
+  }, z.string()),
+});
+
+export function validateManu(object) {
+  return manufacturerPartES.safeParse(object);
+}
 
 export function validateParameterSecundary(object) {
   return parametersS.safeParse(object);

@@ -29,7 +29,30 @@ document.addEventListener("DOMContentLoaded", () => {
         discount: discount,
         finance: finc,
       }),
-    });
-    console.log(await response.json());
+    }).then((data) => data.json());
+
+    console.log(response);
+    //const dataObject = await data.then((data) => JSON.parse(data));
+
+    //   console.log(dataObject);
+    //   document.getElementById("resCost").innerText = dataObject.cost;
+    //   document.getElementById("resExtCost").innerText = dataObject.extCost;
+    //   document.getElementById("resUnitPrice").innerText = dataObject.unitPrice;
+    //   document.getElementById("resUnitDiscPrice").innerText =
+    //     dataObject.unitDiscPrice;
+    //   document.getElementById("resExtDiscPrice").innerText =
+    //     dataObject.extDiscPrice;
+    //   document.getElementById("resMonthlyCostSite").innerText =
+    //     dataObject.monthlyCostSite;
+    //   document.getElementById("resMonthlyPriceSite").innerText =
+    //     dataObject.monthlyPriceSite;
+    //   document.getElementById("resMonthlyCostMbps").innerText =
+    //     dataObject.monthlyCostMbps;
+    //   document.getElementById("resMonthlyPriceMbps").innerText =
+    //     dataObject.monthlyPriceMbps;
+    //   document.getElementById("resFinancedCapex").innerText =
+    //     dataObject.financedCapex;
+    //   document.getElementById("resFinancedMonthlyPriceSite").innerText =
+    //     dataObject.financedMonthlyPriceSite;
   });
 });
