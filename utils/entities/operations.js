@@ -1,47 +1,56 @@
 export class Operations {
   static unitPrice(unitCost, marg) {
+    
     const margin = (100 - marg) / 100;
     const unitPrice = unitCost / margin;
     return unitPrice;
   }
 
   static unitDiscPrice(unitPrice, discount) {
-    const unitDiscPrice = unitPrice * (1 - discount);
-    return unitDiscPrice;
+    
+    if(unitPrice !== null || unitPrice !== "" || typeof unitPrice !== "undefined"){
+      const unitDiscPrice = unitPrice * (1 - discount);
+      return unitDiscPrice;
+    }
+    
+    console.log("El unitPrice es undefined")
+
+    return ""
+    
   }
 
   static extDiscPrice(tipo, qty, unitDiscPrice, contract) {
-    if (tipo === "") {
-      console.log("No se a especificado el tipo");
-      return "";
+    if (tipo !== "" || tipo !== null || typeof tipo !== "undefined") {
+      if (tipo === "OPEX") {
+        const extDiscPrice = contract * unitDiscPrice * qty;
+        return extDiscPrice;
+      }
+      if (tipo === "CAPEX") {
+        const extDiscPrice = unitDiscPrice * qty;
+        return extDiscPrice;
+      }  
+      return 0;
     }
-    if (tipo === "OPEX") {
-      const extDiscPrice = contract * unitDiscPrice * qty;
-      return extDiscPrice;
-    }
-    if (tipo === "CAPEX") {
-      const extDiscPrice = unitDiscPrice * qty;
-      return extDiscPrice;
-    }
-
-    return 0;
+    
+    console.log("No se a especificado el tipo");
+    return "";
   }
 
-  static extCost(tipo, qty, unitCost, contract) {
-    if (tipo === "") {
-      console.log("No se a especificado el tipo");
-      return "";
-    }
-    if (tipo === "OPEX") {
-      const extCost = contract * unitCost * qty;
-      return extCost;
-    }
-    if (tipo === "CAPEX") {
-      const extCost = unitCost * qty;
-      return extCost;
-    }
+  static extCost(tipo, qty, unitCost, contract) {    
+    if (tipo !== "" || tipo !== null || typeof tipo !== "undefined") {    
+      if (tipo === "OPEX") {
+        const extCost = contract * unitCost * qty;
+        return extCost;
+      }
+      if (tipo === "CAPEX") {
+        const extCost = unitCost * qty;
+        return extCost;
+      }
 
-    return 0;
+      return 0;
+    }
+    console.log("No se a especificado el tipo");
+    return "";
   }
 
   static monthlyPriceSite(extDiscPrice, numSites, contract) {
