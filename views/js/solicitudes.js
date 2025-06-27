@@ -1,8 +1,9 @@
 //---Preview Results----
 document.addEventListener("DOMContentLoaded", () => {
   const btnCalcular = document.getElementById("calcular");
+  const formParametros = document.getElementById("formParametros");
 
-  btnCalcular.addEventListener("click", async () => {
+  formParametros.addEventListener("input", async () => {
     const numSites = document.getElementById("numSites").value;
     const capBandKa = document.getElementById("cTotalBandaKa").value;
     const contract = document.getElementById("contract").value;

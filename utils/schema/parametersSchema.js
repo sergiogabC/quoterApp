@@ -18,9 +18,9 @@ const parametersP = z.object({
   // overbooking: preprocess((val) => Number(val), number().min(0).max(100)),
 
   cTotalBandaKa: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 0;
+    if (val === "" || val === null || typeof val === "undefined") return 1;
     return Number(val);
-  }, z.number()),
+  }, z.number().catch(1)),
 
   // mbpsProm: preprocess((val) => Number(val), number()),
   // solDolar: preprocess((val) => Number(val), number()),
@@ -30,7 +30,7 @@ const parametersP = z.object({
   contract: z.preprocess((val) => {
     if (val === "" || val === null || typeof val === "undefined") return 1;
     return Number(val);
-  }, z.number()),
+  }, z.number().catch(1)),
   // sitesPenalties: preprocess((val) => Number(val), number().min(0).max(100)),
   rateFinancingCapex: z.preprocess((val) => {
     if (val === "" || val === null || typeof val === "undefined") return 0;
@@ -61,7 +61,7 @@ const parametersS = z.object({
   }, z.number().min(0).max(100)),
 
   qty: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 0;
+    if (val === "" || val === null || typeof val === "undefined") return 1;
     return Number(val);
   }, z.number()),
 
