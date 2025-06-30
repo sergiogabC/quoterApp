@@ -1,11 +1,13 @@
 import { z } from "zod/v4";
 
 const parametersP = z.object({
-  // client: string(),
-  // country: string(),
-  // proposalManager: string(),
-  // ht19NumberSites: preprocess((val) => Number(val), number()),
-  // sitesOutCoverage: preprocess((val) => Number(val), number().min(0)),
+  client: z.string().optional(),
+  country: z.string().optional(),
+  proposalManager: z.string().optional(),
+  ht19NumberSites: z.preprocess((val) => Number(val), z.number()).optional(),
+  sitesOutCoverage: z
+    .preprocess((val) => Number(val), z.number().min(0))
+    .optional(),
 
   numSites: z.preprocess((val) => {
     if (val === "" || val === null || typeof val === "undefined") return 0;
@@ -48,39 +50,59 @@ const parametersS = z.object({
   type: z.preprocess((val) => {
     if (typeof val !== "string" || val.trim() === "") return "";
     return val.trim().toUpperCase();
-  }, z.string()),
+  }, z.string().catch("")),
 
   manufacturerPart: z.preprocess((val) => {
     if (typeof val !== "string" || val.trim() === "") return "";
     return val.trim();
-  }, z.string()),
+  }, z.string().catch("")),
 
-  margin: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 0;
-    return Number(val);
-  }, z.number().min(0).max(100)),
+  margin: z.preprocess(
+    (val) => {
+      if (val === "" || val === null || typeof val === "undefined") return 0;
+      return Number(val);
+    },
+    z
+      .number()
+      .catch(0)
+      .transform((val) => {
+        if (val < 0) val = 0;
+        if (val > 99) val = 99;
+        return val;
+      })
+  ),
 
   qty: z.preprocess((val) => {
     if (val === "" || val === null || typeof val === "undefined") return 0;
     return Number(val);
   }, z.number().catch(0)),
 
-  discount: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 0;
-    return Number(val);
-  }, z.number().min(0).max(100)),
+  discount: z.preprocess(
+    (val) => {
+      if (val === "" || val === null || typeof val === "undefined") return 0;
+      return Number(val);
+    },
+    z
+      .number()
+      .catch(0)
+      .transform((val) => {
+        if (val < 0) val = 0;
+        if (val > 99) val = 99;
+        return val;
+      })
+  ),
 
   finance: z.preprocess((val) => {
     if (typeof val !== "string" || val.trim() === "") return "";
     return val.trim().toUpperCase();
-  }, z.string()),
+  }, z.string().catch("")),
 });
 
 const manufacturerPartES = z.object({
   manufacturerPart: z.preprocess((val) => {
     if (typeof val !== "string" || val.trim() === "") return "";
     return val.trim();
-  }, z.string()),
+  }, z.string().catch("")),
 });
 
 export function validateManu(object) {

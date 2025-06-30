@@ -3,17 +3,18 @@ import { verified } from "../verified.js";
 export class Operations {
   static unitPrice(unitCost, marg) {
     if (verified(unitCost)) {
-      console.log("fUnitPrice:El valor recibido recibido es 0");
+      console.warn("fUnitPrice:El valor recibido recibido es 0");
       return 0;
     }
-    let margin = (100 - marg) / 100;
-    let unitPrice = unitCost / margin;
+
+    let margin = marg === 0 ? 0 : marg / 100;
+    let unitPrice = unitCost / (1 - margin);
     return unitPrice;
   }
 
   static unitDiscPrice(unitPrice, dis) {
     if (verified(unitPrice)) {
-      console.log("fUnitDiscPrice: el valor recibido es 0");
+      console.warn("fUnitDiscPrice: el valor recibido es 0");
       return 0;
     }
     let discount = dis / 100;
@@ -23,7 +24,7 @@ export class Operations {
 
   static extDiscPrice(tipo, qty, unitDiscPrice, contract) {
     if (verified(qty, unitDiscPrice, contract)) {
-      console.log("fExtDiscPric: El valor recibido es 0");
+      console.warn("fExtDiscPric: El valor recibido es 0");
       return 0;
     }
     if (tipo !== "") {
@@ -37,19 +38,19 @@ export class Operations {
           return extDiscPrice;
         }
         default: {
-          console.log("fExtDiscPrice: No se encuentra el tipo");
+          console.warn("fExtDiscPrice: No se encuentra el tipo");
           return 0;
         }
       }
     }
 
-    console.log("fExtDiscPrice: No se a especificado el tipo");
+    console.warn("fExtDiscPrice: No se a especificado el tipo");
     return 0;
   }
 
   static extCost(type, qty, unitCost, contract) {
     if (verified(qty, unitCost, contract)) {
-      console.log("fExtCost: El valor recibido es 0");
+      console.warn("fExtCost: El valor recibido es 0");
       return 0;
     }
 
@@ -63,18 +64,18 @@ export class Operations {
         return extCost;
       }
       default: {
-        console.log("fExtCost: No se encuentra el tipo");
+        console.warn("fExtCost: No se encuentra el tipo");
         return 0;
       }
     }
 
-    console.log("fExtCost: No se a especificado el tipo");
+    console.warn("fExtCost: No se a especificado el tipo");
     return 0;
   }
 
   static monthlyPriceSite(extDiscPrice, numSites, contract) {
     if (verified(extDiscPrice, numSites, contract)) {
-      console.log("fMonthlyPriceSite: El valor recibido es 0");
+      console.warn("fMonthlyPriceSite: El valor recibido es 0");
       return 0;
     }
     let monthlyPriceSite = extDiscPrice / numSites / contract;
@@ -83,7 +84,7 @@ export class Operations {
 
   static monthlyCostSite(extCost, numSites, contract) {
     if (verified(extCost, numSites, contract)) {
-      console.log("fMonthlyCostSite: El valor recibido es 0");
+      console.warn("fMonthlyCostSite: El valor recibido es 0");
       return 0;
     }
     let monthlyCostSite = extCost / numSites / contract;
@@ -92,7 +93,7 @@ export class Operations {
 
   static monthlyPriceMbps(extDiscPrice, cTotalBandaKa, contract) {
     if (verified(extDiscPrice, cTotalBandaKa, contract)) {
-      console.log("fMonthlyPriceMbps: El valor recibido es 0");
+      console.warn("fMonthlyPriceMbps: El valor recibido es 0");
       return 0;
     }
     let monthlyPriceMbps = extDiscPrice / cTotalBandaKa / contract;
@@ -102,7 +103,7 @@ export class Operations {
 
   static monthlyCostMbps(extCost, cTotalBandaKa, contract) {
     if (verified(extCost, cTotalBandaKa, contract)) {
-      console.log("fMontlhyCostMbps: El valor recibido es 0");
+      console.warn("fMontlhyCostMbps: El valor recibido es 0");
       return 0;
     }
     let monthlyCostMbps = extCost / cTotalBandaKa / contract;
@@ -117,23 +118,23 @@ export class Operations {
     extDiscPrice
   ) {
     if (verified(contract, extDiscPrice)) {
-      console.log("fFinancedCapex: El valor ingresado es 0");
+      console.warn("fFinancedCapex: El valor ingresado es 0");
       return 0;
     }
 
     switch (type) {
       case "": {
         if (finance === "") {
-          console.log("fFinancedCapex: No se a especificado el finance");
+          console.warn("fFinancedCapex: No se a especificado el finance");
           return 0;
         }
-        console.log("fFinancedCapex: No se a especificado el tipo");
+        console.warn("fFinancedCapex: No se a especificado el tipo");
         return 0;
       }
       case "CAPEX": {
         if (finance === "MRC") {
           if (rateFinancingCapex === 0) {
-            console.log("fFinancedCapex: La tasa de financiamiento de es 0");
+            console.warn("fFinancedCapex: La tasa de financiamiento de es 0");
             let financedCapex = extDiscPrice / contract;
             return financedCapex;
           }
@@ -143,11 +144,11 @@ export class Operations {
             ((1 + i) ** contract - 1);
           return financedCapex;
         }
-        console.log("fFinancedCapex: No se a especificado el finance");
+        console.warn("fFinancedCapex: No se a especificado el finance");
         return 0;
       }
       default: {
-        console.log("fFinancedCapex: El tipo no encontrado");
+        console.warn("fFinancedCapex: El tipo no encontrado");
         return 0;
       }
     }
@@ -162,25 +163,27 @@ export class Operations {
     numSites
   ) {
     if (verified(extDiscPrice, contract, numSites)) {
-      console.log("FfinancedMonthlyPriceSite: el valor ingresado es 0");
+      console.warn("FfinancedMonthlyPriceSite: el valor ingresado es 0");
       return 0;
     }
 
     switch (type) {
       case "": {
         if (finance === "") {
-          console.log(
+          console.warn(
             "fFinancedMonthlyPriceSite: No se a especificado  el finance"
           );
           return 0;
         }
-        console.log("fFinancedMonthlyPriceSite: No se a especificado  el tipo");
+        console.warn(
+          "fFinancedMonthlyPriceSite: No se a especificado  el tipo"
+        );
         return 0;
       }
       case "CAPEX": {
         if (finance === "MRC") {
           if (rateFinancingCapex === 0) {
-            console.log(
+            console.warn(
               "fFinancedMonthlyPriceSite: La tasa de financiamiento es 0"
             );
             let financed = extDiscPrice / contract;
@@ -201,7 +204,7 @@ export class Operations {
         return financedXSite;
       }
       default: {
-        console.log("fFinancedMonthlyPriceSite: Tipo no encontrado");
+        console.warn("fFinancedMonthlyPriceSite: Tipo no encontrado");
         return 0;
       }
     }

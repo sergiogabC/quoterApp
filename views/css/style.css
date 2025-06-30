@@ -92,10 +92,18 @@ input{
   border: 1px solid rgba(0, 0, 0, 0.500);
 }
 
+.headTableInputRequired{
+  background-color: #82a8ee;
+  text-align: start;
+  padding-left: 5px;
+  border: none;
+}
+
 .headTableInput{
   background-color: #BDD7EE;
   text-align: start;
   padding-left: 5px;
+  border: none;
 }
 
 .cardInputHead{

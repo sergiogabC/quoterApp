@@ -63,15 +63,25 @@ document.addEventListener("DOMContentLoaded", () => {
 //-------------------(Agregado y eliminado de filas)-----------
 document.addEventListener("DOMContentLoaded", () => {
   const identificadores = document.getElementsByClassName("iden");
-  var contador = [1];
+  let contadorId = [2];
+  let contadorView = [1];
 
-  const contadorArray = (contador, simbolo) => {
-    if (simbolo) {
-      contador.push(contador.length + 1);
-      return contador;
+  const modificadorCifra = (array, boolean) => {
+    if (boolean) {
+      array.push(array.length + 1);
+      return array;
     } else {
-      contador.pop();
-      return contador;
+      array.pop();
+      return array;
+    }
+  };
+  const contadorArray = (contador) => {
+    if (typeof simbolo === "undefined") {
+      for (let i = 0; i <= contador.length; i++) {
+        if ((contador[i] = contador.length)) {
+          return contador[i];
+        }
+      }
     }
   };
 
@@ -79,9 +89,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnMas = document.getElementById("tdMas");
   const tbodyRows = document.getElementById("tbodyRows");
 
-  const innerTr = `
-    <tr class="rowData">
-          <td class="">
+  const innerTr = (cont) => {
+    return `
+    <tr id="tr${cont}" class="rowData">
+          <td  class="">
             <div>
               <strong class="iden"></strong>
             </div>
@@ -127,11 +138,16 @@ document.addEventListener("DOMContentLoaded", () => {
               <button class="buttonMenos" type="button" form="">-</button>
             
           </td></tr>`;
+  };
 
   if (btnMas != null) {
     btnMas.addEventListener("click", () => {
-      tbodyRows.insertAdjacentHTML("beforeend", innerTr);
-      iteradorId(identificadores, contadorArray(contador, true));
+      modificadorCifra(contadorId, true);
+      tbodyRows.insertAdjacentHTML(
+        "beforeend",
+        innerTr(contadorArray(contadorId, undefined))
+      );
+      iteradorView(identificadores, modificadorCifra(contadorView, true));
     });
   }
 
@@ -143,13 +159,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.target && e.target.classList.contains("buttonMenos")) {
         const fila = e.target.closest("tr");
         fila.remove();
-        iteradorId(identificadores, contadorArray(contador, false));
+        contadorArray(contadorId, false);
+        iteradorView(identificadores, modificadorCifra(contadorView, false));
       }
     });
   }
 });
 
-const iteradorId = (identificadores, contador) => {
+const iteradorView = (identificadores, contador) => {
   for (var i = 0; i < identificadores.length; i++) {
     identificadores[i].innerText = contador[i];
   }
