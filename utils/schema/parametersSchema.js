@@ -8,9 +8,9 @@ const parametersP = z.object({
   // sitesOutCoverage: preprocess((val) => Number(val), number().min(0)),
 
   numSites: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 1;
+    if (val === "" || val === null || typeof val === "undefined") return 0;
     return Number(val);
-  }, z.number().min(0, "El número de sitios debe ser mayor a 0")),
+  }, z.number().min(0, "El número de sitios debe ser mayor a 0").catch(0)),
 
   // remoteSpares: preprocess((val) => Number(val), number().min(0).max(100)),
   // totalOfSpares: preprocess((val) => Number(val), number()),
@@ -18,9 +18,9 @@ const parametersP = z.object({
   // overbooking: preprocess((val) => Number(val), number().min(0).max(100)),
 
   cTotalBandaKa: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 1;
+    if (val === "" || val === null || typeof val === "undefined") return 0;
     return Number(val);
-  }, z.number().catch(1)),
+  }, z.number().catch(0)),
 
   // mbpsProm: preprocess((val) => Number(val), number()),
   // solDolar: preprocess((val) => Number(val), number()),
@@ -28,14 +28,14 @@ const parametersP = z.object({
   // costBandKaSes: preprocess((val) => Number(val), number()),
   // costHBandKa: preprocess((val) => Number(val), number()),
   contract: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 1;
+    if (val === "" || val === null || typeof val === "undefined") return 0;
     return Number(val);
-  }, z.number().catch(1)),
+  }, z.number().catch(0)),
   // sitesPenalties: preprocess((val) => Number(val), number().min(0).max(100)),
   rateFinancingCapex: z.preprocess((val) => {
     if (val === "" || val === null || typeof val === "undefined") return 0;
     return Number(val);
-  }, z.number().min(0, "El porcentaje no puede ser negativo").max(100, " El porcentaje no debe ser mayor a 100")),
+  }, z.number().min(0, "El porcentaje no puede ser negativo").max(100, " El porcentaje no debe ser mayor a 100").catch(0)),
 
   // uit: preprocess((val) => Number(val), number().positive()),
 });
@@ -61,9 +61,9 @@ const parametersS = z.object({
   }, z.number().min(0).max(100)),
 
   qty: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 1;
+    if (val === "" || val === null || typeof val === "undefined") return 0;
     return Number(val);
-  }, z.number()),
+  }, z.number().catch(0)),
 
   discount: z.preprocess((val) => {
     if (val === "" || val === null || typeof val === "undefined") return 0;

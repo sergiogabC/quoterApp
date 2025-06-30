@@ -1,11 +1,10 @@
-import {
-  validateManu,
-  validateParameterSecundary,
-  validateParametersPrimary,
-} from "../utils/schema/parametersSchema.js";
 import { MaterialModel } from "../models/json/materialsModel.js";
 import { Operations } from "../utils/entities/operations.js";
 import { Results } from "../utils/entities/results.js";
+import {
+  validateParameterSecundary,
+  validateParametersPrimary,
+} from "../utils/schema/parametersSchema.js";
 
 export class LogicController {
   static async home(req, res) {
@@ -111,7 +110,7 @@ export class LogicController {
 
     console.log(result);
 
-    return res.json({ not: "" });
+    return res.json(result);
   }
 
   static async resultShow(req, res) {
