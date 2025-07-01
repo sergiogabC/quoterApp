@@ -28,8 +28,12 @@ body {
   width: 100%;
 }
 
+.bodyQuoter{
+  overflow-y: scroll;
+}
+
 table tr td{
-  border: 1px solid #D9D9D9;
+  border: 1px solid #cfcccc;
 }
 
 table tr th{
@@ -142,11 +146,11 @@ input{
   max-width: 6.5rem;
   width: auto;
   box-sizing: border-box;
-  border-color: #D9D9D9
+  border-color: #D9D9D9;
 }
 
 .trActive{
-  border: 2px solid #84bcf7 !important
+  border: 2px solid #6fb4fe;
 }
 
 .tdBoton{

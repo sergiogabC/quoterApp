@@ -1,9 +1,12 @@
-// ------ border en tr ------
+// ------ border------
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     const rowsDatas = document.getElementsByClassName("rowData");
     const rowData = e.target.closest("tr");
+    const rowsResults = document.getElementsByClassName("rowResult");
+    const rowResult = e.target.closest("tr");
 
+    //----------Inputs-----------
     if (e.target && e.target.classList.contains("inputData")) {
       for (const rowData of rowsDatas) {
         rowData.classList.remove("trActive");
@@ -12,6 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       for (const rowData of rowsDatas) {
         rowData.classList.remove("trActive");
+      }
+    }
+    //----------Results----------
+    if (e.target && e.target.classList.contains("dataResult")) {
+      for (const rowResult of rowsResults) {
+        rowResult.classList.remove("trActive");
+      }
+      rowResult.classList.add("trActive");
+    } else {
+      for (const rowResult of rowsResults) {
+        rowResult.classList.remove("trActive");
       }
     }
   });
@@ -62,9 +76,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //-------------------(Agregado y eliminado de filas)-----------
 document.addEventListener("DOMContentLoaded", () => {
-  const identificadores = document.getElementsByClassName("iden");
   let contadorId = [2];
   let contadorView = [1];
+  let contadorViewResult = [1];
 
   const modificadorCifra = (array, boolean) => {
     if (boolean) {
@@ -75,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return array;
     }
   };
+
   const contadorArray = (contador) => {
     if (typeof simbolo === "undefined") {
       for (let i = 0; i <= contador.length; i++) {
@@ -86,58 +101,126 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   //AGREGAR FILAS------------------------
+  const identificadores = document.getElementsByClassName("iden");
+  const identificadoresResult = document.getElementsByClassName("idenResult");
   const btnMas = document.getElementById("tdMas");
   const tbodyRows = document.getElementById("tbodyRows");
+  const tbodyRowsResults = document.getElementById("tbodyRowsResults");
 
-  const innerTr = (cont) => {
+  const innerTr = (num) => {
     return `
-    <tr id="tr${cont}" class="rowData">
-          <td  class="">
-            <div>
-              <strong class="iden"></strong>
-            </div>
-          </td>
-          <td class="cardInputData ">
-            <input required type="text" name="tipo" id="tipo" class="inputData"/>
-          </td>
-          <td class="cardInputData ">
-            <input required type="text" name="categoria" id="categoria" class="inputData"/>
-          </td>
-          <td class="cardInputData ">
-            <input required type="text" name="subcategoria" id="subcategoria" class="inputData"/>
-          </td>
-          <td class="cardInputData ">
-            <input required type="text" name="piezaFabricante" id="piezaFabricante" class="inputData"/>
-          </td>
-          <td class="cardInputData ">
-            <input required type="text" name="margen" id="margen" class="inputData"/>
-          </td>
-          <td class="cardInputData ">
-            <input required type="text" name="codigoProducto" id="codigoProducto" class="inputData"/>
-          </td>
-          <td class="cardInputData ">
-            <input required type="text" name="descripcion" id="descripcion" class="inputData"/>
-          </td>
-          <td class="cardInputData ">
-            <input required type="number" class="inputNumber inputData" name="cantidad" id="cantidad" />
-          </td>
-          <td class="cardInputData ">
-            <input required type="text" name="unidadMedida" id="unidadMedida" class="inputData"/>
-          </td>
-          <td class="cardInputData ">
-            <input required type="number" class="inputNumber inputData" name="descuento" id="descuento" />
-          </td>
-          <td class="cardInputData ">
-            <input required type="text" name="financiamiento" id="financiamiento" class="inputData"/>
-          </td>
-          <td class="cardInputData ">
-            <input required type="text" name="dueño" id="dueño" class="inputData"/>
-          </td>
-          <td class="tdBoton">
-            
-              <button class="buttonMenos" type="button" form="">-</button>
-            
-          </td></tr>`;
+          <tr class="rowData" id="tr${num}">
+        <td >
+          <div>
+            <strong class="iden dataResult">1</strong>
+          </div>
+        </td>
+        <td class="cardInputData ">
+          <input required type="text" name="type" id="type${num}" class="inputData"/>
+        </td>
+        <td class="cardInputData ">
+          <input  type="text" name="category" id="category${num}" class="inputData"/>
+        </td>
+        <td class="cardInputData ">
+          <input  type="text" name="subcategory" id="subcategory${num}" class="inputData"/>
+        </td>
+        <td class="cardInputData ">
+          <input required  type="text" name="manufacturerPart" id="manufacturerPart${num}" class="inputData"/>
+        </td>
+        <td class="cardInputData ">
+          <input required  class="inputNumber inputData" type="number" name="margin" id="margin${num}" />
+        </td>
+        <td class="cardInputData ">
+          <input  type="text" name="productCode" id="productCode${num}" class="inputData"/>
+        </td>
+        <td class="cardInputData ">
+          <input  type="text" name="description" id="description${num}" class="inputData"/>
+        </td>
+        <td class="cardInputData ">
+          <input required type="number" class="inputNumber inputData" name="qty" id="qty${num}" class="inputData"/>
+        </td>
+        <td class="cardInputData ">
+          <input  type="text" name="unitMeasure" id="unitMeasure${num}" class="inputData"/>
+        </td>
+        <td class="cardInputData ">
+          <input required type="number" min="0" class="inputNumber inputData" name="discount" id="discount${num}" />
+        </td>
+        <td class="cardInputData ">
+          <input required type="text" name="finance" id="finance${num}" class="inputData"/>
+        </td>
+        <td class="cardInputData ">
+          <input  type="text" name="owner" id="owner${num}" class="inputData"/>
+        </td>
+        <td class="tdBoton" id="tdBoton">                    
+          <button class="buttonMenos" type="button" form="">-</button>          
+        </td>
+      </tr>`;
+  };
+
+  const innerResult = (num) => {
+    return `<tr id="resId${num}" class="rowResult">
+      <td >
+        <div>
+          <strong class="idenResult dataResult" ></strong>
+        </div>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resCost${num}" class="dataResult"> 
+          
+        </strong>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resExtCost${num}" class="dataResult">
+          
+        </strong>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resUnitPrice${num}" class="dataResult">
+          
+        </strong>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resUnitDiscPrice${num}" class="dataResult">
+          
+        </strong>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resExtDiscPrice${num}" class="dataResult"> 
+          
+        </strong>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resMonthlyCostSite${num}" class="dataResult"> 
+          
+        </strong>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resMonthlyPriceSite${num}" class="dataResult">
+          
+        </strong>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resMonthlyCostMbps${num}" class="dataResult">
+          
+        </strong>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resMonthlyPriceMbps${num}" class="dataResult">
+          
+        </strong>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resFinancedCapex${num}" class="dataResult">
+          
+        </strong>
+      </td>
+      <td class="cardResultData dataResult">
+        <strong id="resFinancedMonthlyPriceSite${num}" class="dataResult">
+          
+        </strong>
+      </td>
+
+    </tr>`;
   };
 
   if (btnMas != null) {
@@ -148,6 +231,15 @@ document.addEventListener("DOMContentLoaded", () => {
         innerTr(contadorArray(contadorId, undefined))
       );
       iteradorView(identificadores, modificadorCifra(contadorView, true));
+      //-----------Results------------
+      tbodyRowsResults.insertAdjacentHTML(
+        "beforeend",
+        innerResult(contadorArray(contadorId, undefined))
+      );
+      iteradorView(
+        identificadoresResult,
+        modificadorCifra(contadorViewResult, true)
+      );
     });
   }
 
@@ -157,10 +249,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (tabla != null) {
     tabla.addEventListener("click", (e) => {
       if (e.target && e.target.classList.contains("buttonMenos")) {
-        const fila = e.target.closest("tr");
-        fila.remove();
+        let row = e.target.closest("tr");
+        let numIdRow = row.id.replace("tr", "");
+        let rowResult = document.getElementById(`resId${numIdRow}`);
+        row.remove();
         contadorArray(contadorId, false);
         iteradorView(identificadores, modificadorCifra(contadorView, false));
+        //-----------Results------------
+        rowResult.remove();
+        iteradorView(
+          identificadoresResult,
+          modificadorCifra(contadorViewResult, false)
+        );
       }
     });
   }
