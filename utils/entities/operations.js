@@ -65,7 +65,7 @@ export class Operations {
       }
       default: {
         console.warn("fExtCost: No se encuentra el tipo");
-        return 0;
+        break;
       }
     }
 

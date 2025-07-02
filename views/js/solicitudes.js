@@ -1,26 +1,37 @@
 //---Preview Results----
 document.addEventListener("DOMContentLoaded", () => {
-  const btnCalcular = document.getElementById("calcular");
-  const tbodyRows = document.getElementById("tbodyRows");
-  const tbodyRowsResults = document.getElementById("tbodyRowsResults");
-  const arraysTrs = tbodyRows.children;
-  const arraysTrsResults = tbodyRowsResults.children;
   const divTableRowParams = document.getElementById("divTableRowParams");
   const divParams = document.getElementById("divParams");
-
   const formParametros = document.getElementById("formParametros");
+  const listNames = [
+    "numSites",
+    "cTotalBandaKa",
+    "contract",
+    "rateFinancingCapex",
+    "type",
+    "manufacturerPart",
+    "margin",
+    "qty",
+    "discount",
+    "finance",
+  ];
 
   formParametros.addEventListener("click", async (e) => {
+    //si la tabla de inputs contienen el elemento donde se hizo click
     if (divTableRowParams.contains(e.target) || divParams.contains(e.target)) {
-      formParametros.addEventListener("input", async () => {
-        const numSites = document.getElementById("numSites").value;
-        const capBandKa = document.getElementById("cTotalBandaKa").value;
-        const contract = document.getElementById("contract").value;
-        const rateCapex = document.getElementById("rateFinancingCapex").value;
+      formParametros.addEventListener("input", async (e) => {
+        //si el elemento donde se hizo el evento tiene el name correcto
+        if (
+          listNames.find((value) => value === e.target.attributes.name.value)
+        ) {
+          const numSites = document.getElementById("numSites").value;
+          const capBandKa = document.getElementById("cTotalBandaKa").value;
+          const contract = document.getElementById("contract").value;
+          const rateCapex = document.getElementById("rateFinancingCapex").value;
 
-        console.log("ArraysTrs ", arraysTrs);
-
-        for (let tr of arraysTrs) {
+          let tr = e.target.closest("tr");
+          console.log(tr);
+          console.log("id cambio:", tr.id);
           console.log("tr: ", tr);
           let numId = tr.id.replace("tr", "");
           const type = tr.children[1].children[0].value;
@@ -77,8 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
             `resFinancedMonthlyPriceSite${numId}`
           ).innerText = dataObject.financedMonthlyPriceSite;
         }
-
-        console.log("ArraysTrsResults: ", arraysTrsResults);
       });
     }
   });

@@ -37,7 +37,10 @@ table tr td{
 }
 
 table tr th{
-  border: 1px solid #D1F8EF;
+  border-left: 1px solid #D1F8EF;
+  position: sticky;
+  z-index: 1;
+  top: 0;
 }
 
 strong{
@@ -91,9 +94,22 @@ input{
   background-image: url('../images/image1.jpg');
 }
 
+.divScroll{
+  max-height: 12rem;
+  overflow-y: scroll;
+  display: block;
+}
+
+.divScrollParamsRows{
+  max-height: 60vh;
+  overflow-y: scroll;
+  display: block;
+}
+
 .headerTableInput{
   background-color: #D9D9D9;
   border: 1px solid rgba(0, 0, 0, 0.500);
+  position: static;
 }
 
 .headTableInputRequired{
@@ -101,6 +117,7 @@ input{
   text-align: start;
   padding-left: 5px;
   border: none;
+  position: static;
 }
 
 .headTableInput{
@@ -108,6 +125,7 @@ input{
   text-align: start;
   padding-left: 5px;
   border: none;
+  position: static;
 }
 
 .cardInputHead{
@@ -158,6 +176,17 @@ input{
   width: max-content;
 }
 
+.divInputIncrement{
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.divButton:hover .divInputIncrement{
+  opacity: 1;
+  visibility: visible;
+}
+
 .buttonMas{
   width: 30px;
   height: 30px;
@@ -174,7 +203,7 @@ input{
 }
 
 .buttonMenos{
-  width: 100%;
+  width: 30px;
   height: 20px;
   margin: 0px 2px;
   background-color: #C00000;
