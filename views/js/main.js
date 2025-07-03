@@ -64,7 +64,7 @@ const innerTr = (num) => {
           <input  type="text" name="description" id="description${num}" class="inputData"/>
         </td>
         <td class="cardInputData ">
-          <input required type="number" class="inputNumber inputData" name="qty" id="qty${num}" class="inputData"/>
+          <input required type="number" class="inputNumber inputData" name="qty" id="qty${num}" />
         </td>
         <td class="cardInputData ">
           <input  type="text" name="unitMeasure" id="unitMeasure${num}" class="inputData"/>
@@ -83,6 +83,7 @@ const innerTr = (num) => {
         </td>
       </tr>`;
 };
+
 //Funcion que contiene el html de fila en tabla result
 const innerResult = (num) => {
   return `<tr id="resId${num}" class="rowResult">
@@ -149,7 +150,8 @@ const innerResult = (num) => {
 
     </tr>`;
 };
-// ------ border------
+
+// ------ border ------
 document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     const rowsDatas = document.getElementsByClassName("rowData");
@@ -245,7 +247,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (btnMas != null) {
     btnMas.addEventListener("click", () => {
-      console.log(getComputedStyle(divIncr).display);
       if (getComputedStyle(divIncr).display === "block") {
         let increment = document.getElementById("increment").value;
 
@@ -283,24 +284,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         return;
       }
-      modificadorCifra(contadorId, true);
-      tbodyRows.insertAdjacentHTML(
-        "beforeend",
-        innerTr(contadorArray(contadorId))
-      );
-      iteradorView(identificadores, modificadorCifra(contadorView, true));
-      scrollTable("divTableRowParams");
-
-      //-----------Results------------
-      tbodyRowsResults.insertAdjacentHTML(
-        "beforeend",
-        innerResult(contadorArray(contadorId))
-      );
-      iteradorView(
-        identificadoresResult,
-        modificadorCifra(contadorViewResult, true)
-      );
-      scrollTable("divTableResultScroll");
     });
   }
 

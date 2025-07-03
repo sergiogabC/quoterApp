@@ -1,0 +1,6 @@
+Cosas por terminar
+
+-- El desplazmiento de la tabla result a la linea modificada
+
+-- El cuadro para introducir varios manufacturer part en un solo input y hacer el calculo
+

@@ -30,22 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
           const rateCapex = document.getElementById("rateFinancingCapex").value;
 
           let tr = e.target.closest("tr");
-          console.log(tr);
-          console.log("id cambio:", tr.id);
-          console.log("tr: ", tr);
           let numId = tr.id.replace("tr", "");
-          const type = tr.children[1].children[0].value;
-          console.log(type);
-          const manufacturerPart = tr.children[4].children[0].value;
-          console.log(manufacturerPart);
-          const margin = tr.children[5].children[0].value;
-          console.log(margin);
-          const qty = tr.children[8].children[0].value;
-          console.log(qty);
-          const discount = tr.children[10].children[0].value;
-          console.log(discount);
-          const finc = tr.children[11].children[0].value;
-          console.log(finc);
+
+          const type = document.getElementById(`type${numId}`).value;
+          const manufacturerPart = document.getElementById(
+            `manufacturerPart${numId}`
+          ).value;
+          const margin = document.getElementById(`margin${numId}`).value;
+          const qty = document.getElementById(`qty${numId}`).value;
+          const discount = document.getElementById(`discount${numId}`).value;
+          const finc = document.getElementById(`finance${numId}`).value;
 
           const dataObject = await fetch("/results", {
             method: "POST",
@@ -87,6 +81,16 @@ document.addEventListener("DOMContentLoaded", () => {
           document.getElementById(
             `resFinancedMonthlyPriceSite${numId}`
           ).innerText = dataObject.financedMonthlyPriceSite;
+
+          document
+            .getElementById(`resId${numId}`)
+            .classList.add("trResModified");
+
+          setTimeout(() => {
+            document
+              .getElementById(`resId${numId}`)
+              .classList.remove("trResModified");
+          }, 2000);
         }
       });
     }

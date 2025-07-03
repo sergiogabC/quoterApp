@@ -23,11 +23,31 @@ export class LogicController {
     console.log("Datos con parse P:", paramsResultP);
     console.log("Datos con parse S: ", paramsResultS);
 
-    const materialData = await MaterialModel.getMaterial(
-      paramsResultS.data.manufacturerPart
-    );
-
-    console.log(materialData);
+    try {
+      const materialData = await MaterialModel.getMaterial(
+        paramsResultS.data.manufacturerPart
+      );
+    } catch (err) {
+      console.error("err:", err);
+      const numCero = 0.0;
+      console.log("result start");
+      const result = new Results(
+        numCero,
+        numCero,
+        numCero,
+        numCero,
+        numCero,
+        numCero,
+        numCero,
+        numCero,
+        numCero,
+        numCero,
+        numCero
+      );
+      console.log("result end");
+      console.log(result);
+      return res.json(result);
+    }
 
     const unitPrice = Operations.unitPrice(
       materialData.cost,
