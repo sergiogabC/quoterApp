@@ -82,6 +82,15 @@ document.addEventListener("DOMContentLoaded", () => {
             `resFinancedMonthlyPriceSite${numId}`
           ).innerText = dataObject.financedMonthlyPriceSite;
 
+          const tableInput = document.getElementById("divTableResultScroll");
+
+          let numScroll = document.getElementById(`resId${numId}`).offsetTop;
+          //30 x cada fila superior qu esta abajo del cuadro
+          tableInput.scrollTo({
+            top: numScroll - 90,
+            behavior: "smooth",
+          });
+
           document
             .getElementById(`resId${numId}`)
             .classList.add("trResModified");
