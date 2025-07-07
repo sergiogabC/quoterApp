@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
           let numScroll = document.getElementById(`resId${numId}`).offsetTop;
           //30 x cada fila superior qu esta abajo del cuadro
           tableInput.scrollTo({
-            top: numScroll - 90,
+            top: numScroll - 180,
             behavior: "smooth",
           });
 

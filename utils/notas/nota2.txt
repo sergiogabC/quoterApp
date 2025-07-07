@@ -2,13 +2,24 @@ Cosas por terminar
 
 -- El desplazmiento de la tabla result a la linea modificada (check)
 
--- El cuadro para introducir varios manufacturer part en un solo input y hacer el calculo
+-- Desglozmiento de la introduccion de varios manufacturers{
 
-//cod para ver el height del tr en divTableResultScroll
-document.addEventListener("click",(e)=>{
-    //console.log(document.getElementById("divTableResultScroll"));
-    if(e.target.nodeName === "STRONG"){
-        let tr = e.target.closest("tr");
-        console.log("cor click: ", tr.offsetTop);
+    -En el input principal del td se permitira ingresar varios manufacturer a la vez con poner un + el cual se resaltara
+
+    -Se ingresara un button a cada td al costado del input{
+        
+        -El button mostrara el div
+
+        -Se mostra en el div el input original
+
+        -Habra un button + que aumentara el input para ingresar un nuevo manufacturer, si el input queda en blanco este se eliminara,
+        este button estara al costado del input original
+
+        -El div tendra un input x cada manufacturer
+
+        -Cuando se haga click fuera del div se cerrara
+
     }
-})
+}
+
+

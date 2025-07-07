@@ -46,3 +46,12 @@ document.getElementById("resFinancedCapex").innerText =
   dataObject.financedCapex;
 document.getElementById("resFinancedMonthlyPriceSite").innerText =
   dataObject.financedMonthlyPriceSite;
+
+//cod para ver el height del tr en divTableResultScroll
+document.addEventListener("click",(e)=>{
+    //console.log(document.getElementById("divTableResultScroll"));
+    if(e.target.nodeName === "STRONG"){
+        let tr = e.target.closest("tr");
+        console.log("cor click: ", tr.offsetTop);
+    }
+})  
