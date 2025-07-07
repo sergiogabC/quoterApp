@@ -8,7 +8,7 @@ export class MaterialModel {
         if(typeof material === "undefined" ){            
             throw new Error("getMaterial: El material Number es undefined")            
         }
-
+        console.log("check getMaterial");
         return material;
     }
 

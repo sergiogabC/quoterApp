@@ -23,8 +23,9 @@ export class LogicController {
     console.log("Datos con parse P:", paramsResultP);
     console.log("Datos con parse S: ", paramsResultS);
 
+    let materialData;
     try {
-      const materialData = await MaterialModel.getMaterial(
+      materialData = await MaterialModel.getMaterial(
         paramsResultS.data.manufacturerPart
       );
     } catch (err) {
@@ -48,6 +49,7 @@ export class LogicController {
       console.log(result);
       return res.json(result);
     }
+    console.log("check");
 
     const unitPrice = Operations.unitPrice(
       materialData.cost,

@@ -52,21 +52,37 @@
         </td>
         <td class="cardInputData">
           <div class="flex flex-row">
-            <div class="flex w-[70%]">
+            <div class="w-4/5">
               <input
-            required
-            type="text"
-            name="manufacturerPart"
-            id="manufacturerPart1"
-            class="inputData"
+                required
+                type="text"
+                name="manufacturerPart"
+                id="manufacturerPart1"
+                class="inputData"
               />
-          </div>
-          <div class="flex w-[30%]">
-            <button>+</button>
-          </div>
-          </div>
-        
+            </div>
 
+            <div class="flex w-1/5 justify-center items-center">
+              <button
+                type="button"
+                class="flex items-center justify-center w-1 h-5 rounded-full bg-[#4CAF50] text-white"
+              >
+                <svg
+                  class="w-full h-full"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 8v8m4-4H8"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
         </td>
         <td class="cardInputData">
           <input
@@ -100,7 +116,6 @@
             class="inputNumber inputData"
             name="qty"
             id="qty1"
-            
           />
         </td>
         <td class="cardInputData">
@@ -145,12 +160,24 @@
     <table id="tableIncr">
       <thead>
         <tr>
-          <th class="p-1 bg-[#4CAF50]"><strong class="text-white">N° Filas+</strong></th>
+          <th class="p-1 bg-[#4CAF50]">
+            <strong class="text-white">N° Filas+</strong>
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td ><input type="number" name="" id="increment" min="1" max="100" class="" value="1"/></td>
+          <td>
+            <input
+              type="number"
+              name=""
+              id="increment"
+              min="1"
+              max="100"
+              class=""
+              value="1"
+            />
+          </td>
         </tr>
       </tbody>
     </table>

@@ -52,7 +52,20 @@ const innerTr = (num) => {
           <input  type="text" name="subcategory" id="subcategory${num}" class="inputData"/>
         </td>
         <td class="cardInputData ">
-          <input required  type="text" name="manufacturerPart" id="manufacturerPart${num}" class="inputData"/>
+          <div class="flex flex-row">
+            <div class="flex w-4/5">
+              <input
+            required
+            type="text"
+            name="manufacturerPart"
+            id="manufacturerPart1"
+            class="inputData"
+              />
+          </div>
+          <div class="flex w-1/5">
+            <button>+</button>
+          </div>
+          </div>
         </td>
         <td class="cardInputData ">
           <input required  class="inputNumber inputData" type="number" name="margin" id="margin${num}" />
@@ -152,21 +165,23 @@ const innerResult = (num) => {
 };
 
 // ------ border ------
-document.addEventListener("DOMContentLoaded", () => {
-  document.addEventListener("click", (e) => {
-    const rowsDatas = document.getElementsByClassName("rowData");
-    const rowData = e.target.closest("tr");
-    const rowsResults = document.getElementsByClassName("rowResult");
-    const rowResult = e.target.closest("tr");
-    const classs = "trActive";
+const funBor = () => {
+  document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("click", (e) => {
+      const rowsDatas = document.getElementsByClassName("rowData");
+      const rowData = e.target.closest("tr");
+      const rowsResults = document.getElementsByClassName("rowResult");
+      const rowResult = e.target.closest("tr");
+      const classs = "trActive";
 
-    //----------Inputs-----------
-    clickBorder(e, "inputData", rowsDatas, rowData, classs);
+      //----------Inputs-----------
+      clickBorder(e, "inputData", rowsDatas, rowData, classs);
 
-    //----------Results----------
-    clickBorder(e, "dataResult", rowsResults, rowResult, classs);
+      //----------Results----------
+      clickBorder(e, "dataResult", rowsResults, rowResult, classs);
+    });
   });
-});
+};
 
 // --------Mostrar Includes-------------------
 document.addEventListener("DOMContentLoaded", () => {

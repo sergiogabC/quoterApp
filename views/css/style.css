@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-.roboto-uniquifier{
+.roboto-uniquifier {
   font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
   font-weight: weight;
   font-style: normal;
-  font-variation-settings:"wdth" 100;
+  font-variation-settings: "wdth" 100;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -44,7 +44,7 @@ html {
   scroll-behavior: smooth;
 }
 
-body {  
+body {
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -52,22 +52,22 @@ body {
   width: 100%;
 }
 
-.bodyQuoter{
+.bodyQuoter {
   overflow-y: scroll;
 }
 
-table tr td{
+table tr td {
   border: 1px solid #cfcccc;
 }
 
-table tr th{
-  border-left: 1px solid #D1F8EF;
+table tr th {
+  border-left: 1px solid #d1f8ef;
   position: sticky;
   z-index: 1;
   top: 0;
 }
 
-strong{
+strong {
   display: flex;
   font-size: 0.9rem;
   font-weight: 600;
@@ -76,7 +76,7 @@ strong{
   justify-content: center;
 }
 
-button{
+button {
   display: inline-block;
   width: 100%;
   text-align: center;
@@ -84,7 +84,7 @@ button{
   font-weight: 700;
 }
 
-input{
+input {
   width: 100%;
   box-sizing: border-box;
   text-align: center;
@@ -92,61 +92,61 @@ input{
   justify-content: center;
 }
 
-.not-visible{
+.not-visible {
   display: none;
 }
 
-.buttonEnviar{
+.buttonEnviar {
   width: 5rem;
   height: 3rem;
   background-color: #8cafef;
   display: flex;
-  border: solid 1px #D9D9D9;
+  border: solid 1px #d9d9d9;
   border-radius: 15px;
 }
-.button{
+.button {
   width: auto;
   background-color: #8cafef;
   display: inline-block;
-  border: solid 1px #D9D9D9;
+  border: solid 1px #d9d9d9;
   border-radius: 15px;
   text-align: center;
   padding: 0.5rem 1rem;
 }
 
-.bodyHome{
-  background-image: url('../images/image1.jpg');
+.bodyHome {
+  background-image: url("../images/image1.jpg");
 }
 
-.divScroll{
+.divScroll {
   max-height: 12rem;
   overflow-y: scroll;
   display: block;
 }
 
-.divScrollParamsRows{
+.divScrollParamsRows {
   max-height: 60vh;
   overflow-y: scroll;
   display: block;
 }
 
-.rowResult:hover{
+.rowResult:hover {
   background-color: #8cafef;
   transition: background-color 0.1s ease;
 }
 
-.rowResult{
+.rowResult {
   background-color: white;
   transition: background-color 0.5s ease;
 }
 
-.headerTableInput{
-  background-color: #D9D9D9;
-  border: 1px solid rgba(0, 0, 0, 0.500);
+.headerTableInput {
+  background-color: #d9d9d9;
+  border: 1px solid rgba(0, 0, 0, 0.5);
   position: static;
 }
 
-.headTableInputRequired{
+.headTableInputRequired {
   background-color: #8cafef;
   text-align: start;
   padding-left: 5px;
@@ -154,15 +154,15 @@ input{
   position: static;
 }
 
-.headTableInput{
-  background-color: #BDD7EE;
+.headTableInput {
+  background-color: #bdd7ee;
   text-align: start;
   padding-left: 5px;
   border: none;
   position: static;
 }
 
-.cardInputHead{
+.cardInputHead {
   min-width: 4rem;
   max-width: 6rem;
   width: auto;
@@ -172,66 +172,79 @@ input{
   text-align: center;
 }
 
-.cardInputData{
+.cardInputData {
   flex-basis: auto;
   min-width: 4rem;
   max-width: 6rem;
   width: auto;
   box-sizing: border-box;
-  
 }
 
-.cardResultHead{
+.cardResultHead {
   min-width: 4rem;
   max-width: 6.5rem;
   width: auto;
   padding: 0.5rem 1rem;
   box-sizing: border-box;
-  background-color: #F8CBAD;
-  border-color: #D9D9D9;
+  background-color: #f8cbad;
+  border-color: #d9d9d9;
   text-align: center;
 }
 
-.cardResultData{
+.cardResultData {
   flex-basis: auto;
   min-width: 4rem;
   max-width: 6.5rem;
   width: auto;
   box-sizing: border-box;
-  border-color: #D9D9D9;
+  border-color: #d9d9d9;
 }
 
-.trActive{
-  border: 2px solid #6fb4fe;
+rowData {
+  position: relative;
 }
 
-.trResModified{
+.rowData:focus::after {
+  content: "";
+  position: absolute;
+  border: solid 2px #6fb4fe;
+  pointer-events: none;
+}
+.trActive {
+  position: relative;
+}
 
-  background-color:  #8cafef;
-  
+.trActive::after::after {
+  content: "";
+  position: absolute;
+}
+
+.trResModified {
+  background-color: #8cafef;
+
   transition: background-color 3s ease;
 }
 
-.tdBoton{
+.tdBoton {
   border: none;
   width: max-content;
 }
 
-.divInputIncrement{
+.divInputIncrement {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
-.divButton:hover .divInputIncrement{
+.divButton:hover .divInputIncrement {
   opacity: 1;
   visibility: visible;
 }
 
-.buttonMas{
+.buttonMas {
   width: 30px;
   height: 30px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   font-size: 2rem;
   border-radius: 50%;
@@ -243,11 +256,11 @@ input{
   font-weight: lighter;
 }
 
-.buttonMenos{
+.buttonMenos {
   width: 30px;
   height: 20px;
   margin: 0px 2px;
-  background-color: #C00000;
+  background-color: #c00000;
   color: white;
   font-size: 2rem;
   border-radius: 20%;
@@ -260,12 +273,12 @@ input{
   padding: 0px 3px;
 }
 
-.buttonResult{
-  background-color: #F8CBAD;
+.buttonResult {
+  background-color: #f8cbad;
   width: auto;
   height: 3rem;
   display: flex;
-  border: solid 1px #D9D9D9;
+  border: solid 1px #d9d9d9;
   border-radius: 15px;
   align-items: center;
   justify-content: center;
