@@ -6,13 +6,26 @@ export class MaterialModel {
         
         const material = await materials.find((material)=> material.material_number === materialNumber)
         if(typeof material === "undefined" ){            
-            throw new Error("getMaterial: El material Number es undefined")            
+            throw new Error("getMaterial: El material Number es undefined")
         }
-        console.log("check getMaterial");
-        return material;
-    }
-
-    static async getMaterials(){
         
+        return material;
+    };
+
+    static async getMaterials(materialsNumbers){
+            
+        let mats=[];
+        for(let mat of materialsNumbers){
+
+            let material = await materials.find((material)=>material.material_number === mat);
+            if(typeof material ==="undefined"){
+                new Error("getMaterials: El material Number es undefined")
+            }else{
+                mats.push(material);
+            }                                    
+        }
+        
+        return mats;
+
     }
 }

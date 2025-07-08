@@ -33,9 +33,11 @@ document.addEventListener("DOMContentLoaded", () => {
           let numId = tr.id.replace("tr", "");
 
           const type = document.getElementById(`type${numId}`).value;
+
           const manufacturerPart = document.getElementById(
             `manufacturerPart${numId}`
           ).value;
+
           const margin = document.getElementById(`margin${numId}`).value;
           const qty = document.getElementById(`qty${numId}`).value;
           const discount = document.getElementById(`discount${numId}`).value;

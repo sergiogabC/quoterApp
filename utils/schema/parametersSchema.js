@@ -98,13 +98,6 @@ const parametersS = z.object({
   }, z.string().catch("")),
 });
 
-const manufacturerPartES = z.object({
-  manufacturerPart: z.preprocess((val) => {
-    if (typeof val !== "string" || val.trim() === "") return "";
-    return val.trim();
-  }, z.string().catch("")),
-});
-
 export function validateManu(object) {
   return manufacturerPartES.safeParse(object);
 }

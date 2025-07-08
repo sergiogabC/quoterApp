@@ -340,16 +340,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //----------Mostrar div de inputs------------
-document.addEventListener("DOMContentLoaded", () => {
-  document.addEventListener("click", (e) => {
-    if (e.target.tagName === "INPUT") {
-      if (e.target.attributes.name.nodeValue === "manufacturerPart") {
-        const input = e.target;
-        input.addEventListener("input", () => {
-          let inputValue = input.value;
-          let manu = [];
-        });
-      }
-    }
-  });
-});
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   document.addEventListener("input", (e) => {
+//     if (e.target.tagName === "INPUT") {
+//       if (e.target.attributes.name.nodeValue === "manufacturerPart") {
+//         let manus = [];
+//         let inputValue = e.target.value;
+//         manus = iterManu(inputValue);
+//         console.log(manus);
+//       }
+//     }
+//   });
+// });
+
+// Separa los textos x cada + y los convierte en un array

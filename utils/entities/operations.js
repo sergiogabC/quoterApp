@@ -1,4 +1,4 @@
-import { verified } from "../verified.js";
+import { verified } from "../scripts.js";
 
 export class Operations {
   static unitPrice(unitCost, marg) {
@@ -22,13 +22,13 @@ export class Operations {
     return unitDiscPrice;
   }
 
-  static extDiscPrice(tipo, qty, unitDiscPrice, contract) {
+  static extDiscPrice(type, qty, unitDiscPrice, contract) {
     if (verified(qty, unitDiscPrice, contract)) {
       console.warn("fExtDiscPric: El valor recibido es 0");
       return 0;
     }
-    if (tipo !== "") {
-      switch (tipo) {
+    if (type !== "") {
+      switch (type) {
         case "OPEX": {
           let extDiscPrice = contract * unitDiscPrice * qty;
           return extDiscPrice;
@@ -208,5 +208,76 @@ export class Operations {
         return 0;
       }
     }
+  }
+
+  static qto(
+    unicost,
+    marg,
+    dis,
+    type,
+    qty,
+    contract,
+    numSites,
+    cTotalBandaKa,
+    finance,
+    rateFinancingCapex
+  ) {
+    const unitPrice = Operations.unitPrice(unicost, marg);
+    const unitDiscPrice = Operations.unitDiscPrice(unitPrice, dis);
+    const extDiscPrice = Operations.extDiscPrice(
+      type,
+      qty,
+      unitDiscPrice,
+      contract
+    );
+    const extCost = Operations.extCost(type, qty, unicost, contract);
+    const monthlyPriceSite = Operations.monthlyPriceSite(
+      extDiscPrice,
+      numSites,
+      contract
+    );
+    const monthlyCostSite = Operations.monthlyCostSite(
+      extCost,
+      numSites,
+      contract
+    );
+    const monthlyPriceMbps = Operations.monthlyPriceMbps(
+      extDiscPrice,
+      cTotalBandaKa,
+      contract
+    );
+    const monthlyCostMbps = Operations.monthlyCostMbps(
+      extCost,
+      cTotalBandaKa,
+      contract
+    );
+    const financedCapex = Operations.financedCapex(
+      type,
+      finance,
+      rateFinancingCapex,
+      contract,
+      extDiscPrice
+    );
+    const financedMonthlyPriceSite = Operations.financedMonthlyPriceSite(
+      type,
+      finance,
+      rateFinancingCapex,
+      contract,
+      extDiscPrice,
+      numSites
+    );
+
+    return {
+      unitPrice: unitPrice,
+      unitDiscPrice: unitDiscPrice,
+      extDiscPrice: extDiscPrice,
+      extCost: extCost,
+      monthlyPriceSite: monthlyPriceSite,
+      monthlyCostSite: monthlyCostSite,
+      monthlyPriceMbps: monthlyPriceMbps,
+      monthlyCostMbps: monthlyCostMbps,
+      financedCapex: financedCapex,
+      financedMonthlyPriceSite: financedMonthlyPriceSite,
+    };
   }
 }

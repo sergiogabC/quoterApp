@@ -5,6 +5,7 @@ import {
   validateParameterSecundary,
   validateParametersPrimary,
 } from "../utils/schema/parametersSchema.js";
+import { iterManu } from "../utils/scripts.js";
 
 export class LogicController {
   static async home(req, res) {
@@ -19,19 +20,23 @@ export class LogicController {
     const paramsResultP = validateParametersPrimary(req.body);
     const paramsResultS = validateParameterSecundary(req.body);
 
-    console.log("Datos req.body: ", req.body);
-    console.log("Datos con parse P:", paramsResultP);
-    console.log("Datos con parse S: ", paramsResultS);
-
-    let materialData;
+    let cost = 0;
     try {
-      materialData = await MaterialModel.getMaterial(
-        paramsResultS.data.manufacturerPart
-      );
+      let manu = iterManu(paramsResultS.data.manufacturerPart);
+
+      if (typeof manu === "string") {
+        let materialData = await MaterialModel.getMaterial(
+          paramsResultS.data.manufacturerPart
+        );
+        cost = materialData.cost;
+      } else if (Array.isArray(manu)) {
+        let materialsDatas = await MaterialModel.getMaterials(manu);
+        for (let materialData of materialsDatas) {
+          cost += materialData.cost;
+        }
+      }
     } catch (err) {
-      console.error("err:", err);
       const numCero = 0.0;
-      console.log("result start");
       const result = new Results(
         numCero,
         numCero,
@@ -45,92 +50,35 @@ export class LogicController {
         numCero,
         numCero
       );
-      console.log("result end");
-      console.log(result);
       return res.json(result);
     }
-    console.log("check");
 
-    const unitPrice = Operations.unitPrice(
-      materialData.cost,
-      paramsResultS.data.margin
-    );
-
-    const unitDiscPrice = Operations.unitDiscPrice(
-      unitPrice,
-      paramsResultS.data.discount
-    );
-
-    const extDiscPrice = Operations.extDiscPrice(
+    const qto = Operations.qto(
+      cost,
+      paramsResultS.data.margin,
+      paramsResultS.data.discount,
       paramsResultS.data.type,
       paramsResultS.data.qty,
-      unitDiscPrice,
-      paramsResultP.data.contract
-    );
-
-    const extCost = Operations.extCost(
-      paramsResultS.data.type,
-      paramsResultS.data.qty,
-      materialData.cost,
-      paramsResultP.data.contract
-    );
-
-    const monthlyPriceSite = Operations.monthlyPriceSite(
-      extDiscPrice,
-      paramsResultP.data.numSites,
-      paramsResultP.data.contract
-    );
-
-    const monthlyCostSite = Operations.monthlyCostSite(
-      extCost,
-      paramsResultP.data.numSites,
-      paramsResultP.data.contract
-    );
-
-    const monthlyPriceMbps = Operations.monthlyPriceMbps(
-      extDiscPrice,
-      paramsResultP.data.cTotalBandaKa,
-      paramsResultP.data.contract
-    );
-
-    const monthlyCostMbps = Operations.monthlyCostMbps(
-      extCost,
-      paramsResultP.data.cTotalBandaKa,
-      paramsResultP.data.contract
-    );
-
-    const financedCapex = Operations.financedCapex(
-      paramsResultS.data.type,
-      paramsResultS.data.finance,
-      paramsResultP.data.rateFinancingCapex,
       paramsResultP.data.contract,
-      extDiscPrice
-    );
-
-    const financedMonthlyPriceSite = Operations.financedMonthlyPriceSite(
-      paramsResultS.data.type,
+      paramsResultP.data.numSites,
+      paramsResultP.data.cTotalBandaKa,
       paramsResultS.data.finance,
-      paramsResultP.data.rateFinancingCapex,
-      paramsResultP.data.contract,
-      extDiscPrice,
-      paramsResultP.data.numSites
+      paramsResultP.data.rateFinancingCapex
     );
 
     const result = new Results(
-      materialData.cost,
-      unitPrice,
-      unitDiscPrice,
-      extDiscPrice,
-      extCost,
-      monthlyPriceSite,
-      monthlyCostSite,
-      monthlyPriceMbps,
-      monthlyCostMbps,
-      financedCapex,
-      financedMonthlyPriceSite
+      cost,
+      qto.unitPrice,
+      qto.unitDiscPrice,
+      qto.extDiscPrice,
+      qto.extCost,
+      qto.monthlyPriceSite,
+      qto.monthlyCostSite,
+      qto.monthlyPriceMbps,
+      qto.monthlyCostMbps,
+      qto.financedCapex,
+      qto.financedMonthlyPriceSite
     );
-
-    console.log(result);
 
     return res.json(result);
   }
