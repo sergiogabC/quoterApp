@@ -122,12 +122,13 @@ export class Operations {
       return 0;
     }
 
+    if (finance === "") {
+      new Error("fFinancedCapex: No se a especificado el finance");
+      return 0;
+    }
+
     switch (type) {
       case "": {
-        if (finance === "") {
-          console.warn("fFinancedCapex: No se a especificado el finance");
-          return 0;
-        }
         console.warn("fFinancedCapex: No se a especificado el tipo");
         return 0;
       }
@@ -148,7 +149,7 @@ export class Operations {
         return 0;
       }
       default: {
-        console.warn("fFinancedCapex: El tipo no encontrado");
+        console.warn("fFinancedCapex: El tipo no es el correspondiente");
         return 0;
       }
     }

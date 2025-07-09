@@ -10,4 +10,4 @@ qRoutes.get("/parametros", LogicController.paramsShow);
 
 qRoutes.post("/results", LogicController.params);
 
-//qRoutes.get("/results",LogicController.resultShow)
+qRoutes.post("/exists", LogicController.exists);

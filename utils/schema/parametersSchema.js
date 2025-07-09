@@ -98,10 +98,17 @@ const parametersS = z.object({
   }, z.string().catch("")),
 });
 
-export function validateManu(object) {
-  return manufacturerPartES.safeParse(object);
-}
-
 export function validateParameterSecundary(object) {
   return parametersS.safeParse(object);
+}
+
+const manufacturerPartES = z.object({
+  manufacturerPart: z.preprocess((val) => {
+    if (typeof val !== "string" || val.trim() === "") return "";
+    return val.trim();
+  }, z.string().catch("")),
+});
+
+export function validateManu(object) {
+  return manufacturerPartES.safeParse(object);
 }

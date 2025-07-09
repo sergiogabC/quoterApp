@@ -2,6 +2,7 @@ import { MaterialModel } from "../models/json/materialsModel.js";
 import { Operations } from "../utils/entities/operations.js";
 import { Results } from "../utils/entities/results.js";
 import {
+  validateManu,
   validateParameterSecundary,
   validateParametersPrimary,
 } from "../utils/schema/parametersSchema.js";
@@ -9,30 +10,30 @@ import { iterManu } from "../utils/scripts.js";
 
 export class LogicController {
   static async home(req, res) {
-    res.render("index");
+    return res.render("index");
   }
 
   static async paramsShow(req, res) {
-    res.render("quoter");
+    return res.render("quoter");
   }
 
   static async params(req, res) {
-    const paramsResultP = validateParametersPrimary(req.body);
-    const paramsResultS = validateParameterSecundary(req.body);
+    const validateP = validateParametersPrimary(req.body);
+    const validateS = validateParameterSecundary(req.body);
 
     let cost = 0;
     try {
-      let manu = iterManu(paramsResultS.data.manufacturerPart);
+      let manu = iterManu(validateS.data.manufacturerPart);
 
       if (typeof manu === "string") {
-        let materialData = await MaterialModel.getMaterial(
+        let response = await MaterialModel.getMaterial(
           paramsResultS.data.manufacturerPart
         );
-        cost = materialData.cost;
+        cost = response.cost;
       } else if (Array.isArray(manu)) {
-        let materialsDatas = await MaterialModel.getMaterials(manu);
-        for (let materialData of materialsDatas) {
-          cost += materialData.cost;
+        let response = await MaterialModel.getMaterials(manu);
+        for (let material of response) {
+          cost += material.cost;
         }
       }
     } catch (err) {
@@ -55,15 +56,15 @@ export class LogicController {
 
     const qto = Operations.qto(
       cost,
-      paramsResultS.data.margin,
-      paramsResultS.data.discount,
-      paramsResultS.data.type,
-      paramsResultS.data.qty,
-      paramsResultP.data.contract,
-      paramsResultP.data.numSites,
-      paramsResultP.data.cTotalBandaKa,
-      paramsResultS.data.finance,
-      paramsResultP.data.rateFinancingCapex
+      validateS.data.margin,
+      validateS.data.discount,
+      validateS.data.type,
+      validateS.data.qty,
+      validateP.data.contract,
+      validateP.data.numSites,
+      validateP.data.cTotalBandaKa,
+      validateS.data.finance,
+      validateP.data.rateFinancingCapex
     );
 
     const result = new Results(
@@ -83,7 +84,29 @@ export class LogicController {
     return res.json(result);
   }
 
-  static async resultShow(req, res) {
-    res.render("inputsParameters/result", { res: "" });
+  static async exists(req, res) {
+    console.log("start");
+    const validate = validateManu(req.body);
+
+    let manu = iterManu(validate.data.manufacturerPart);
+    let response;
+    let cost;
+    try {
+      if (typeof manu === "string") {
+        response = await MaterialModel.getMaterial(
+          validate.data.manufacturerPart
+        );
+        cost = response.cost;
+      } else if (Array.isArray(manu)) {
+        response = await MaterialModel.getMaterials(manu);
+        for (let material of response) {
+          cost += material.cost;
+        }
+      }
+    } catch (e) {
+      return res.status(400).send("material_number invalidos");
+    }
+
+    return res.status(200).json(response);
   }
 }
