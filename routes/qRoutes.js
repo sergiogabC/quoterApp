@@ -8,6 +8,8 @@ qRoutes.get("/", LogicController.home);
 
 qRoutes.get("/parametros", LogicController.paramsShow);
 
-qRoutes.post("/results", LogicController.params);
+qRoutes.post("/results", LogicController.results);
 
 qRoutes.post("/exists", LogicController.exists);
+
+qRoutes.post("/calculate", LogicController.calculate);

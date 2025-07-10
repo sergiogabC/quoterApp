@@ -112,3 +112,14 @@ const manufacturerPartES = z.object({
 export function validateManu(object) {
   return manufacturerPartES.safeParse(object);
 }
+
+const costES = z.object({
+  cost: z.preprocess((val) => {
+    if (typeof val !== "string" || val.trim() === "") return 0;
+    return Number(val);
+  }, z.number().catch(0)),
+});
+
+export function validateCost(object) {
+  return costES.safeParse(object);
+}

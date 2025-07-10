@@ -2,6 +2,7 @@ import { MaterialModel } from "../models/json/materialsModel.js";
 import { Operations } from "../utils/entities/operations.js";
 import { Results } from "../utils/entities/results.js";
 import {
+  validateCost,
   validateManu,
   validateParameterSecundary,
   validateParametersPrimary,
@@ -17,7 +18,7 @@ export class LogicController {
     return res.render("quoter");
   }
 
-  static async params(req, res) {
+  static async results(req, res) {
     const validateP = validateParametersPrimary(req.body);
     const validateS = validateParameterSecundary(req.body);
 
@@ -81,16 +82,15 @@ export class LogicController {
       qto.financedMonthlyPriceSite
     );
 
-    return res.json(result);
+    return res.status(200).json(result);
   }
 
   static async exists(req, res) {
-    console.log("start");
     const validate = validateManu(req.body);
 
     let manu = iterManu(validate.data.manufacturerPart);
     let response;
-    let cost;
+    let cost = 0;
     try {
       if (typeof manu === "string") {
         response = await MaterialModel.getMaterial(
@@ -104,9 +104,44 @@ export class LogicController {
         }
       }
     } catch (e) {
-      return res.status(400).send("material_number invalidos");
+      return res.json({ complete: false });
     }
 
-    return res.status(200).json(response);
+    return res.status(200).json({ complete: true, cost: cost });
+  }
+
+  static async calculate(req, res) {
+    const validateP = validateParametersPrimary(req.body);
+    const validateS = validateParameterSecundary(req.body);
+    const validateC = validateCost(req.body);
+
+    const qto = Operations.qto(
+      validateC.data.cost,
+      validateS.data.margin,
+      validateS.data.discount,
+      validateS.data.type,
+      validateS.data.qty,
+      validateP.data.contract,
+      validateP.data.numSites,
+      validateP.data.cTotalBandaKa,
+      validateS.data.finance,
+      validateP.data.rateFinancingCapex
+    );
+
+    const result = new Results(
+      validateC.data.cost,
+      qto.unitPrice,
+      qto.unitDiscPrice,
+      qto.extDiscPrice,
+      qto.extCost,
+      qto.monthlyPriceSite,
+      qto.monthlyCostSite,
+      qto.monthlyPriceMbps,
+      qto.monthlyCostMbps,
+      qto.financedCapex,
+      qto.financedMonthlyPriceSite
+    );
+
+    return res.status(200).json(result);
   }
 }
