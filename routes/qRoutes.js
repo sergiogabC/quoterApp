@@ -13,3 +13,5 @@ qRoutes.post("/results", LogicController.results);
 qRoutes.post("/exists", LogicController.exists);
 
 qRoutes.post("/calculate", LogicController.calculate);
+
+qRoutes.post("/conversion", LogicController.conversion);

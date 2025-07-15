@@ -2,6 +2,10 @@ import { MaterialModel } from "../models/json/materialsModel.js";
 import { Operations } from "../utils/entities/operations.js";
 import { Results } from "../utils/entities/results.js";
 import {
+  validateParamPriExcel,
+  validateParamSecExcel,
+} from "../utils/schema/ExcelSchema.js";
+import {
   validateCost,
   validateManu,
   validateParameterSecundary,
@@ -143,5 +147,15 @@ export class LogicController {
     );
 
     return res.status(200).json(result);
+  }
+
+  static async conversion(req, res) {
+    console.log("req body: ", req.body);
+    let valP = validateParamPriExcel(req.body);
+    let valS = validateParamSecExcel(req.body);
+
+    console.log("valP:", valP);
+    console.log("valS:", valS);
+    return res.send("");
   }
 }
