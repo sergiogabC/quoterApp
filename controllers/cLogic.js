@@ -1,4 +1,4 @@
-import { MaterialModel } from "../models/json/materialsModel.js";
+import { MaterialModel } from "../models/materialsModel.js";
 import { Operations } from "../utils/entities/operations.js";
 import { Results } from "../utils/entities/results.js";
 import {
@@ -154,8 +154,8 @@ export class LogicController {
     let valP = validateParamPriExcel(req.body);
     let valS = validateParamSecExcel(req.body);
 
-    console.log("valP:", valP);
-    console.log("valS:", valS);
+    console.log("valP:", valP.data);
+    console.log("valS:", valS.data);
     return res.send("");
   }
 }

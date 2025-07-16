@@ -1,4 +1,4 @@
-import materials from "./costingReport.json" with { type: 'json' };
+import materials from "./json/costingReport.json" with { type: 'json' };
 
 export class MaterialModel {
 

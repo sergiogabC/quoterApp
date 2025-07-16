@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { positive } from "zod/v4";
 
 const parametersPriExcel = z.object({
   client: z.string(),
@@ -98,10 +99,20 @@ const parametersSecExcel = z.object({
     return val;
   }, z.array(z.string().catch(""))),
 
-  //   manufacturerPart: z.preprocess((val) => {
-  //     if (typeof val !== "string" || val.trim() === "") return "";
-  //     return val.trim();
-  //   }, z.string().catch("")),
+  category: z.preprocess((val) => {
+    if (!Array.isArray(val)) return new Array(val);
+    return val;
+  }, z.array(z.string().catch(""))),
+
+  subcategory: z.preprocess((val) => {
+    if (!Array.isArray(val)) return new Array(val);
+    return val;
+  }, z.array(z.string().catch(""))),
+
+  manufacturerPart: z.preprocess((val) => {
+    if (!Array.isArray(val)) return new Array(val);
+    return val;
+  }, z.array(z.string().catch(""))),
 
   margin: z.preprocess(
     (val) => {
@@ -110,8 +121,11 @@ const parametersSecExcel = z.object({
         let list = [val];
         return list;
       } else {
-        val.flatMap((v) => (!isNaN(v) ? (v = Number(v)) : (v = 0)));
-        return val;
+        let list = [];
+        for (let v of val) {
+          !isNaN(v) ? list.push(Number(v)) : new Error("margin: is nan");
+        }
+        return list;
       }
     },
     z.array(
@@ -126,30 +140,70 @@ const parametersSecExcel = z.object({
     )
   ),
 
-  //   qty: z.preprocess((val) => {
-  //     if (val === "" || val === null || typeof val === "undefined") return 0;
-  //     return Number(val);
-  //   }, z.number().catch(0)),
+  productCode: z.preprocess((val) => {
+    if (!Array.isArray(val)) return new Array(val);
+    return val;
+  }, z.array(z.string().catch(""))),
 
-  //   discount: z.preprocess(
-  //     (val) => {
-  //       if (val === "" || val === null || typeof val === "undefined") return 0;
-  //       return Number(val);
-  //     },
-  //     z
-  //       .number()
-  //       .catch(0)
-  //       .transform((val) => {
-  //         if (val < 0) val = 0;
-  //         if (val > 99) val = 99;
-  //         return val;
-  //       })
-  //   ),
+  description: z.preprocess((val) => {
+    if (!Array.isArray(val)) return new Array(val);
+    return val;
+  }, z.array(z.string().catch(""))),
 
-  //   finance: z.preprocess((val) => {
-  //     if (typeof val !== "string" || val.trim() === "") return "";
-  //     return val.trim().toUpperCase();
-  //   }, z.string().catch("")),
+  qty: z.preprocess((val) => {
+    if (!Array.isArray(val)) {
+      !isNaN(val) ? (val = Number(val)) : (val = 0);
+      let list = [val];
+      return list;
+    } else {
+      let list = [];
+      for (let v of val) {
+        !isNaN(v) ? list.push(Number(v)) : new Error("qty: is nan");
+      }
+      return list;
+    }
+  }, z.array(z.number().positive().catch(0))),
+
+  unitMeasure: z.preprocess((val) => {
+    if (!Array.isArray(val)) return new Array(val);
+    return val;
+  }, z.array(z.string().catch(""))),
+
+  discount: z.preprocess(
+    (val) => {
+      if (!Array.isArray(val)) {
+        !isNaN(val) ? (val = Number(val)) : (val = 0);
+        let list = [val];
+        return list;
+      } else {
+        let list = [];
+        for (let v of val) {
+          !isNaN(v) ? list.push(Number(v)) : new Error("discount: is nan");
+        }
+        return list;
+      }
+    },
+    z.array(
+      z
+        .number()
+        .catch(0)
+        .transform((val) => {
+          if (val < 0) val = 0;
+          if (val > 99) val = 99;
+          return val;
+        })
+    )
+  ),
+
+  finance: z.preprocess((val) => {
+    if (!Array.isArray(val)) return new Array(val);
+    return val;
+  }, z.array(z.string().catch(""))),
+
+  owner: z.preprocess((val) => {
+    if (!Array.isArray(val)) return new Array(val);
+    return val;
+  }, z.array(z.string().catch(""))),
 });
 
 export function validateParamSecExcel(object) {
