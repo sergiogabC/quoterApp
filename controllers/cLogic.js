@@ -1,3 +1,5 @@
+import { execFile } from "node:child_process";
+import path from "node:path";
 import { MaterialModel } from "../models/materialsModel.js";
 import { Operations } from "../utils/entities/operations.js";
 import { Results } from "../utils/entities/results.js";
@@ -150,12 +152,75 @@ export class LogicController {
   }
 
   static async conversion(req, res) {
-    console.log("req body: ", req.body);
+    const rutaJar = path.resolve("../services/createExcel-1.0-SNAPSHOT.jar");
+    const outpath = path.resolve("../services/")
+
+    const data = JSON.stringify([
+      {
+        row: 0,
+        data: {
+          type: "1111",
+          category: "sda",
+          subCategory: "asa",
+          manufacturerPart: "qqqqq+qqq",
+          productCode: "vv",
+          description: "11",
+          qty: 22,
+          unitMeasure: "asda",
+          discount: 11,
+          finance: "www",
+        },
+      },
+      {
+        row: 1,
+        data: {
+          type: "22",
+          category: "vs",
+          subCategory: "da",
+          manufacturerPart: "11",
+          productCode: "aa",
+          description: "ss",
+          qty: 2,
+          unitMeasure: "ad",
+          discount: 11,
+          finance: "122",
+        },
+      },
+    ]);
+
+    //console.log("req body: ", req.body);
     let valP = validateParamPriExcel(req.body);
     let valS = validateParamSecExcel(req.body);
 
-    console.log("valP:", valP.data);
-    console.log("valS:", valS.data);
+    // exec("java -version", (error, stdout, stderr) => {
+    //   if (error) {
+    //     console.error("Error ejecutando java:", error);
+    //     return;
+    //   }
+
+    //   console.log("Versión de Java detectada:");
+    //   console.log(stderr); // la versión suele venir en stderr
+    // });
+
+    execFile("java", ["-jar", rutaJar, data], (error, stdout, stderr) => {
+      if (error) {
+        console.error(error);
+        return;
+      }
+    });
+
+    //   if (fs.existsSync(outputPath)) {
+    //     res.download(outputPath, "", (e) => {
+    //       if (e) {
+    //         console.error("Error al enviar archivo", error);
+    //       }
+    //     });
+    //   }
+    // });
+
+    // console.log("valP:", valP.data);
+    // console.log("valS:", valS.data);
+
     return res.send("");
   }
 }
