@@ -14,6 +14,7 @@ import {
   validateParametersPrimary,
 } from "../utils/schema/parametersSchema.js";
 import { iterManu } from "../utils/scripts.js";
+import { ar } from "zod/v4/locales";
 
 export class LogicController {
   static async home(req, res) {
@@ -152,41 +153,11 @@ export class LogicController {
   }
 
   static async conversion(req, res) {
-    const rutaJar = path.resolve("../services/createExcel-1.0-SNAPSHOT.jar");
-    const outpath = path.resolve("../services/")
+    const jarPath = path.resolve("./services/createExcel-1.0-SNAPSHOT.jar");
+    const outpath = path.resolve("./data/documents/workbook.xlsx");
+    const dataPath = path.resolve("./data/json/data.json");
 
-    const data = JSON.stringify([
-      {
-        row: 0,
-        data: {
-          type: "1111",
-          category: "sda",
-          subCategory: "asa",
-          manufacturerPart: "qqqqq+qqq",
-          productCode: "vv",
-          description: "11",
-          qty: 22,
-          unitMeasure: "asda",
-          discount: 11,
-          finance: "www",
-        },
-      },
-      {
-        row: 1,
-        data: {
-          type: "22",
-          category: "vs",
-          subCategory: "da",
-          manufacturerPart: "11",
-          productCode: "aa",
-          description: "ss",
-          qty: 2,
-          unitMeasure: "ad",
-          discount: 11,
-          finance: "122",
-        },
-      },
-    ]);
+    const args = ["-jar", jarPath, dataPath, outpath];
 
     //console.log("req body: ", req.body);
     let valP = validateParamPriExcel(req.body);
@@ -202,11 +173,22 @@ export class LogicController {
     //   console.log(stderr); // la versión suele venir en stderr
     // });
 
-    execFile("java", ["-jar", rutaJar, data], (error, stdout, stderr) => {
+    execFile("java", args, (error, stdout, stderr) => {
       if (error) {
         console.error(error);
         return;
       }
+      if (stderr) {
+        console.log(stderr);
+        return;
+      }
+      console.log("check");
+      console.log(stdout);
+      return res.download(outpath, "workbook.xlsx", (e) => {
+        if (e) {
+          return;
+        }
+      });
     });
 
     //   if (fs.existsSync(outputPath)) {
@@ -220,7 +202,5 @@ export class LogicController {
 
     // console.log("valP:", valP.data);
     // console.log("valS:", valS.data);
-
-    return res.send("");
   }
 }
