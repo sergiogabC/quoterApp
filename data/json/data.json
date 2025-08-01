@@ -1,30 +1,65 @@
-[
- {
-  "row":0,
-  "data":{
-          "type":"1111",
-          "category":"sda",
-          "subCategory":"asa",
-          "manufacturerPart":"qqqqq+qqq",
-          "productCode":"vv","description":"11",
-          "qty":22,"unitMeasure":"asda",
-          "discount":11,
-          "finance":"www"
-         }
- },
- {
-  "row":1,
-  "data":{
-	  "type":"22",
-          "category":"vs",
-          "subCategory":"da",
-          "manufacturerPart":"11",
-          "productCode":"aa",
-          "description":"ss",
-          "qty":2,
-          "unitMeasure":"ad",
-          "discount":11,
-          "finance":"122"
-         }
- }
-]
+{
+ "listParemeters":
+        {
+                "client":"",
+                "country":"",
+                "proposalManager":"",
+                "hT19numberSites":1204,
+                "sitesOutCoverage":0,
+                "numberSites":1204,
+                "remoteSpares":3.00,
+                "totalSpares":37,
+                "servicePlan":"",
+                "totalCapacityS17Mbps":0,
+                "overbooking":17,
+                "totalKaBandCapacityMbps":7023,
+                "averageMbpsSite":5.8,
+                "solDolar": 3.70,
+                "terminalUnitPriceExWorks":0.00,
+                "costSesKaBandMbpsMonthUsd":125,
+                "costHuguesKaBandMbpsMonthUsd":40,
+                "contract":18,
+                "sitesPenaltiesMonth":1.00,
+                "capexFinancingRate":14.00,
+                "uit":1338
+        }
+ ,
+ "listDatas":[
+        {
+                "row":0,
+                "data":{
+                        "type":"CAPEX",
+                        "category":"Hughes Equipment",
+                        "subCategory":"VSAT",
+                        "manufacturerPart":"1506560-0021+1506561-0021",
+                        "productCode":"ANTENA 90CM",
+                        "description":"90cm Ka-Band Saturated Antenna (Single IFL) 1pk",
+                        "qty":1204,
+                        "unitMeasure":"Unit",
+                        "discount":0,
+                        "finance":"NRC",
+                        "unitCost":22,
+                        "owner":"ddd",
+                        "margin":30
+                }
+        },
+        {
+                "row":0,
+                "data":{
+                        "type":"CAPEX",
+                        "category":"Hughes Equipment",
+                        "subCategory":"VSAT",
+                        "manufacturerPart":"1506560-0021+1506561-0021",
+                        "productCode":"ANTENA 90CM",
+                        "description":"90cm Ka-Band Saturated Antenna (Single IFL) 1pk",
+                        "qty":1204,
+                        "unitMeasure":"Unit",
+                        "discount":0,
+                        "finance":"NRC",
+                        "unitCost":22,
+                        "owner":"ddd",
+                        "margin":30
+                }
+        }
+ ]
+}
