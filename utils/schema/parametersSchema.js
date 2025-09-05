@@ -2,22 +2,22 @@ import { z } from "zod/v4";
 
 const parametersP = z.object({
   numSites: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 0;
+    if (val === "" || val === null || Number.isNaN(val)) return 0;
     return Number(val);
   }, z.number().min(0, "El número de sitios debe ser mayor a 0").catch(0)),
 
   cTotalBandaKa: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 0;
+    if (val === "" || val === null || Number.isNaN(val)) return 0;
     return Number(val);
   }, z.number().catch(0)),
 
   contract: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 0;
+    if (val === "" || val === null || Number.isNaN(val)) return 0;
     return Number(val);
   }, z.number().catch(0)),
 
   rateFinancingCapex: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 0;
+    if (val === "" || val === null || Number.isNaN(val)) return 0;
     return Number(val);
   }, z.number().min(0, "El porcentaje no puede ser negativo").max(100, " El porcentaje no debe ser mayor a 100").catch(0)),
 });
@@ -39,7 +39,7 @@ const parametersS = z.object({
 
   margin: z.preprocess(
     (val) => {
-      if (val === "" || val === null || typeof val === "undefined") return 0;
+      if (val === "" || val === null || Number.isNaN(val)) return 0;
       return Number(val);
     },
     z
@@ -53,13 +53,13 @@ const parametersS = z.object({
   ),
 
   qty: z.preprocess((val) => {
-    if (val === "" || val === null || typeof val === "undefined") return 0;
+    if (val === "" || val === null || Number.isNaN(val)) return 0;
     return Number(val);
   }, z.number().catch(0)),
 
   discount: z.preprocess(
     (val) => {
-      if (val === "" || val === null || typeof val === "undefined") return 0;
+      if (val === "" || val === null || Number.isNaN(val)) return 0;
       return Number(val);
     },
     z

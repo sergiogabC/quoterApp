@@ -1,8 +1,10 @@
-import { execFile } from "node:child_process";
-import path from "node:path";
+import { execFile } from "child_process";
+import path from "path";
 import { MaterialModel } from "../models/materialsModel.js";
 import { Operations } from "../utils/entities/operations.js";
+import { ParametersData } from "../utils/entities/parametersData.js";
 import { Results } from "../utils/entities/results.js";
+import { UnitData } from "../utils/entities/unitData.js";
 import {
   validateParamPriExcel,
   validateParamSecExcel,
@@ -14,7 +16,6 @@ import {
   validateParametersPrimary,
 } from "../utils/schema/parametersSchema.js";
 import { iterManu } from "../utils/scripts.js";
-import { ar } from "zod/v4/locales";
 
 export class LogicController {
   static async home(req, res) {
@@ -153,25 +154,57 @@ export class LogicController {
   }
 
   static async conversion(req, res) {
-    const jarPath = path.resolve("./services/createExcel-1.0-SNAPSHOT.jar");
+    const validateP = validateParamPriExcel(req.body);
+    const validateS = validateParamSecExcel(req.body);
+
+    const contSizeData = validateS.data.category.length;
+
+    const listDatas = [];
+
+    const parametersData = new ParametersData(validateP.data);
+
+    if (contSizeData > 1000) {
+      console.log("xxx");
+    }
+
+    for (let i = 0; i < contSizeData; i++) {
+      let response = { cost: 0 };
+      try {
+        response = await MaterialModel.getMaterial(
+          validateS.data.manufacturerPart[i]
+        );
+      } catch (e) {
+        response = { cost: 0 };
+      }
+
+      const unitData = new UnitData(
+        validateS.data.type[i],
+        validateS.data.category[i],
+        validateS.data.subcategory[i],
+        validateS.data.manufacturerPart[i],
+        validateS.data.margin[i],
+        validateS.data.productCode[i],
+        validateS.data.description[i],
+        validateS.data.qty[i],
+        validateS.data.unitMeasure[i],
+        validateS.data.discount[i],
+        validateS.data.finance[i],
+        validateS.data.owner[i],
+        response.cost
+      );
+
+      listDatas.push({ row: i, data: unitData.exportData() });
+    }
+
+    const schememaData = {
+      parameters: parametersData.exportData(),
+      listDatas: listDatas,
+    };
+
+    const jarPath = path.resolve("./services/modifiedExcel-1.0-SNAPSHOT.jar");
     const outpath = path.resolve("./data/documents/workbook.xlsx");
-    const dataPath = path.resolve("./data/json/data.json");
 
-    const args = ["-jar", jarPath, dataPath, outpath];
-
-    //console.log("req body: ", req.body);
-    let valP = validateParamPriExcel(req.body);
-    let valS = validateParamSecExcel(req.body);
-
-    // exec("java -version", (error, stdout, stderr) => {
-    //   if (error) {
-    //     console.error("Error ejecutando java:", error);
-    //     return;
-    //   }
-
-    //   console.log("Versión de Java detectada:");
-    //   console.log(stderr); // la versión suele venir en stderr
-    // });
+    const args = ["-jar", jarPath, JSON.stringify(schememaData), outpath];
 
     execFile("java", args, (error, stdout, stderr) => {
       if (error) {
@@ -190,17 +223,5 @@ export class LogicController {
         }
       });
     });
-
-    //   if (fs.existsSync(outputPath)) {
-    //     res.download(outputPath, "", (e) => {
-    //       if (e) {
-    //         console.error("Error al enviar archivo", error);
-    //       }
-    //     });
-    //   }
-    // });
-
-    // console.log("valP:", valP.data);
-    // console.log("valS:", valS.data);
   }
 }
