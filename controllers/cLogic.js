@@ -1,4 +1,5 @@
 import { execFile } from "child_process";
+import fs from "fs";
 import path from "path";
 import { MaterialModel } from "../models/materialsModel.js";
 import { Operations } from "../utils/entities/operations.js";
@@ -204,7 +205,7 @@ export class LogicController {
     const jarPath = path.resolve("./services/modifiedExcel-1.0-SNAPSHOT.jar");
     const outDir = path.resolve("./data/documents");
 
-    if (!fs.existsSync(outpath)) {
+    if (!fs.existsSync(outDir)) {
       fs.mkdirSync(outDir, { recursive: true });
     }
 
