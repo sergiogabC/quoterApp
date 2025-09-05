@@ -1,23 +1,35 @@
-# Imagen base con Node.js y Java
-FROM node:22-bullseye
+# Imagen base con Java 21
+FROM openjdk:21-jdk-slim
 
-# Instalar JDK (para tu .jar)
-RUN apt-get update && apt-get install -y openjdk-21-jre && rm -rf /var/lib/apt/lists/*
+# Instalar Node.js 22
+RUN apt-get update && \
+    apt-get install -y curl gnupg && \
+    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install -y nodejs && \
+    rm -rf /var/lib/apt/lists/*
 
-# Crear directorio de trabajo
-WORKDIR /app
+# Crear directorio de la app
+WORKDIR /quoterApp
 
-# Copiar package.json y package-lock.json
+# Copiar package.json y package-lock.json primero para aprovechar la cache
 COPY package*.json ./
 
-# Instalar dependencias de Node
-RUN npm install --only=production
+# Instalar dependencias de Node.js
+RUN npm install --production
 
-# Copiar el código de tu app
-COPY . .
+# Copiar el resto del proyecto (incluyendo tu .jar y tu workbook.xlsx si aplica)
 
-# Exponer el puerto de Express
+COPY data/ ./data/
+COPY services/ ./services/
+COPY controllers/ ./controllers/
+COPY models/ ./models/
+COPY routes/ ./routes/
+COPY utils/ ./utils/
+COPY views/ ./views/
+COPY app.js ./ 
+
+# Exponer el puerto que Render usará ($PORT)
 EXPOSE 3000
 
-# Comando de inicio
+# Comando de arranque
 CMD ["npm", "start"]
