@@ -202,9 +202,15 @@ export class LogicController {
     };
 
     const jarPath = path.resolve("./services/modifiedExcel-1.0-SNAPSHOT.jar");
-    const outpath = path.resolve("./data/documents/workbook.xlsx");
+    const outDir = path.resolve("./data/documents");
 
     const args = ["-jar", jarPath, JSON.stringify(schememaData), outpath];
+
+    if (!fs.existsSync(outpath)) {
+      fs.mkdirSync(outDir, { recursive: true });
+    }
+
+    const outpath = path.join(outDir, "workbook.xlsx");
 
     execFile("java", args, (error, stdout, stderr) => {
       if (error) {
@@ -219,7 +225,7 @@ export class LogicController {
       console.log(stdout);
       return res.download(outpath, "workbook.xlsx", (e) => {
         if (e) {
-          return;
+          return e;
         }
       });
     });
