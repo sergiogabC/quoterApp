@@ -1,8 +1,7 @@
 //---Preview Results----
 document.addEventListener("DOMContentLoaded", () => {
-  const divTableRowParams = document.getElementById("divTableRowParams");
-  const divParams = document.getElementById("divParams");
   const formParametros = document.getElementById("formParametros");
+  //Lista de names de los inputs que disparan el evento
   const listNames = [
     "numSites",
     "cTotalBandaKa",
@@ -15,18 +14,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "discount",
     "finance",
   ];
-  let cont = 0;
 
+  //Espera eventos en los inputs del formulario
   formParametros.addEventListener("input", async (e) => {
+    //verifica si el evento es en un input y si el name del input esta en la lista
     if (
       e.target.tagName === "INPUT" &&
       listNames.find((value) => value === e.target.attributes.name.value)
     ) {
-      cont++;
-      console.log("cont: ", cont);
-      console.log("input: ", e.target);
       let tr = e.target.closest("tr");
       let numId = tr.id.replace("tr", "");
+
       const numCer = "0.00";
       const valueMax = "99";
 
@@ -34,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `manufacturerPart${numId}`
       ).value;
 
+      //si no hay manufacturerPart no hace la consulta
       if (manufacturerPart === "") {
         document.getElementById(`resCost${numId}`).innerText = numCer;
         document.getElementById(`resExtCost${numId}`).innerText = numCer;
@@ -55,13 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      //verifica si el manufacturerPart existe en la base de datos
       const resOk = await fetch("/exists", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({ manufacturerPart: manufacturerPart }),
       }).then((val) => val.json());
 
+      //si existe hace la consulta a la api de calculo
       if (resOk.complete) {
+        //valores de los demas inputs
         const numSites = document.getElementById("numSites").value;
         const capBandKa = document.getElementById("cTotalBandaKa").value;
         const contract = document.getElementById("contract").value;
@@ -72,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const discount = document.getElementById(`discount${numId}`).value;
         const finc = document.getElementById(`finance${numId}`).value;
 
+        //validacion de valores margin y discount
         switch (true) {
           case margin >= 100:
             alert("Valor Maximo es: 99");
@@ -83,6 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
             break;
         }
 
+        //consulta a la api de calculo
         const dataObject = await fetch("/calculate", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -100,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }),
         }).then((data) => data.json());
 
+        //pone los resultados en la tabla
         document.getElementById(`resCost${numId}`).innerText =
           dataObject.unitCost;
         document.getElementById(`resExtCost${numId}`).innerText =
@@ -124,12 +129,12 @@ document.addEventListener("DOMContentLoaded", () => {
           `resFinancedMonthlyPriceSite${numId}`
         ).innerText = dataObject.financedMonthlyPriceSite;
 
+        //hace scroll hasta la fila modificada y la resalta
         const tableInput = document.getElementById("divTableResultScroll");
-
         let numScroll = document.getElementById(`resId${numId}`).offsetTop;
-        //30 x cada fila superior qu esta abajo del cuadro
+
         tableInput.scrollTo({
-          top: numScroll - 180,
+          top: numScroll - 180, //30 x cada fila superior qu esta abajo del cuadro
           behavior: "smooth",
         });
 
@@ -141,6 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .classList.remove("trResModified");
         }, 2000);
       } else {
+        //si no existe el manufacturerPart en la base de datos pone todo en ceros
         document.getElementById(`resCost${numId}`).innerText = numCer;
         document.getElementById(`resExtCost${numId}`).innerText = numCer;
         document.getElementById(`resUnitPrice${numId}`).innerText = numCer;
@@ -158,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById(
           `resFinancedMonthlyPriceSite${numId}`
         ).innerText = numCer;
+
         return;
       }
     }

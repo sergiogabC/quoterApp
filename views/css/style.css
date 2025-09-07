@@ -47,7 +47,7 @@ body {
   background-attachment: fixed;
   background-position: center;
   height: 100vh;
-  width: 100%;
+  width: auto;
 }
 
 table tr td {
@@ -59,6 +59,7 @@ table tr th {
   position: sticky;
   z-index: 2;
   top: 0;
+  line-height: 1.2;
 }
 
 strong {
@@ -170,6 +171,7 @@ a {
 .divGeneral {
   display: flex;
   flex-direction: column;
+  gap: 4rem;
   padding: 2%;
 }
 
@@ -178,14 +180,21 @@ a {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
+  width: auto;
   min-width: 80%;
-  margin-block: 2%;
-  padding-inline: 1%;
+  gap: 3rem;
 }
 
-/*--------  Boton Mostrar Parametros -----------*/
+/*-- Agrupador de botones --*/
+
+.cdivGrouperButtons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1rem;
+}
+
+/*----  Boton Mostrar Parametros ---*/
 
 .divButtonShowParams {
   display: flex;
@@ -212,15 +221,19 @@ a {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-width: max-content;
+  min-width: auto;
 }
 
 .cdivTableParams {
   display: flex;
+  width: 100%;
+  overflow-x: scroll;
 }
 
-.ctableParams {
+.cTableParams {
   table-layout: auto;
+  width: 100%;
+  min-width: 600px;
 }
 
 .headerTableParams {
@@ -241,6 +254,7 @@ a {
   padding-left: 5px;
   border: none;
   position: static;
+  width: 60%;
 }
 
 .headTableInputRequired {
@@ -249,6 +263,7 @@ a {
   padding-left: 5px;
   border: none;
   position: static;
+  width: 60%;
 }
 
 /*----------Seccion Tabla Resultados-----*/
@@ -258,7 +273,7 @@ a {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-width: max-content;
+  min-width: auto;
 }
 
 /*-Boton Pre-Visualizacion-*/
@@ -267,8 +282,7 @@ a {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  max-width: 90%;
-  width: max-content;
+  width: 100%;
 }
 
 .divButtonPreView {
@@ -278,7 +292,6 @@ a {
 .buttonResult {
   background-color: #f8cbad;
   width: auto;
-  height: 3rem;
   display: flex;
   border: solid 1px #d9d9d9;
   border-radius: 15px;
@@ -291,9 +304,8 @@ a {
 .cdivTableResults {
   display: none;
   width: 100%;
-  min-width: max-content;
+  min-width: auto;
   justify-content: center;
-  padding-inline: 2%;
 }
 
 .divScroll {
@@ -306,7 +318,7 @@ a {
   table-layout: auto;
   border-collapse: collapse;
   width: 100%;
-  min-width: max-content;
+  min-width: auto;
 }
 
 .cardResultHeadEmpty {
@@ -367,27 +379,25 @@ a {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-width: max-content;
-  padding: 1%;
+  min-width: auto;
+  gap: 2rem;
 }
 
 /*-- Tabla Qto --*/
 .divTableQto {
   display: block;
-  align-items: center;
   width: 100%;
-  min-width: max-content;
+  min-width: auto;
 }
 
 .divScrollParamsRows {
-  max-height: 60vh;
+  max-height: 35vh;
   overflow-y: scroll;
-  display: block;
 }
 
 .tableQto {
   width: 100%;
-  min-width: max-content;
+  min-width: auto;
   table-layout: auto;
   border-collapse: collapse;
 }
@@ -509,7 +519,6 @@ a {
   justify-content: center;
   width: 100%;
   min-width: max-content;
-  margin-block: 2%;
 }
 
 .buttonConvert {
@@ -530,4 +539,40 @@ a {
   border: solid 1px #d9d9d9;
   border-radius: 15px;
   margin-left: 0.75rem;
+}
+
+/*--Estilos auxiliares para cambiar con js--*/
+.cdivGrouperButtons.modified {
+  flex-direction: column;
+  width: 40%;
+}
+
+/*----------- Media Queries -----------*/
+
+@media (max-width: 1320px) {
+  .sectionSpacer {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
+
+  .divScroll {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .divGrouper {
+    flex-direction: column-reverse;
+  }
+  .cdivGrouperButtons.modified {
+    width: 100%;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 450px) {
+  .cdivGrouperButtons {
+    display: flex;
+    flex-direction: column;
+  }
 }

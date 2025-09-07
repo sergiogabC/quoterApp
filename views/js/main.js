@@ -1,9 +1,9 @@
-const iteradorView = (identificadores, contador) => {
+const iteradorView = (rows, contador) => {
   //Se pasa un array de elementos y otro de numeros
   //y se a cada elemento recorrido en la posicion i
   //se le introduce el numero del array de numero en su posicion i, coinciendo una es escala de 1 al infinito
-  for (var i = 0; i < identificadores.length; i++) {
-    identificadores[i].innerText = contador[i];
+  for (var i = 0; i < rows.length; i++) {
+    rows[i].innerText = contador[i];
   }
 };
 
@@ -248,6 +248,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const divParams = document.getElementById("divParams");
   const divButtonParams = document.getElementById("divButtonParams");
 
+  const divGroupButtons = document.getElementById("divGrouperButtons");
+
   // ---------Mostrar Parametros(renderizar el include)-----------
 
   if (btnMostrarParametros != null) {
@@ -255,9 +257,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (divParams.style.display === "flex") {
         divParams.style.display = "none";
         btnMostrarParametros.innerText = "Mostrar Parametros";
+        divGroupButtons.classList.remove("modified");
       } else {
         divParams.style.display = "flex";
         btnMostrarParametros.innerText = "Ocultar Parametros";
+        divGroupButtons.classList.add("modified");
       }
     });
   }
@@ -270,12 +274,14 @@ document.addEventListener("DOMContentLoaded", () => {
         divTableResults.style.display = "none";
         divButtonParams.style.display = "flex";
         btnPreview.innerText = "Pre - Visualizacíon";
+        divGroupButtons.classList.remove("modified");
       } else {
         divTableResults.style.display = "flex";
         divParams.style.display = "none";
         divButtonParams.style.display = "none";
         btnMostrarParametros.innerText = "Mostrar Parametros";
         btnPreview.innerText = "Ocultar";
+        divGroupButtons.classList.remove("modified");
       }
     });
   }
@@ -287,6 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let contadorView = [1];
   let contadorViewResult = [1];
 
+  //Funcion que agrega o quita numeros al array de numeros
   const modificadorCifra = (array, boolean) => {
     if (boolean) {
       array.push(array.length + 1);
@@ -297,6 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  //Funcion que devuelve el ultimo numero del array
   const contadorArray = (contador) => {
     if (contador) {
       for (let i = 0; i <= contador.length; i++) {
@@ -308,6 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   //AGREGAR FILAS------------------------
+  //Se accede a los elementos necesarios
   const identificadores = document.getElementsByClassName("iden");
   const identificadoresResult = document.getElementsByClassName("idenResult");
   const btnMas = document.getElementById("tdMas");
@@ -320,6 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (getComputedStyle(divIncr).display === "block") {
         let increment = document.getElementById("increment").value;
 
+        //Validacion de valores del boton de incremento
         switch (true) {
           case increment === "":
             increment = 1;
@@ -333,25 +343,36 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         for (let i = 1; i <= increment; i++) {
+          //-----------Inputs-------------------
+          //se aumenta el id de la fila
           modificadorCifra(contadorId, true);
+
+          //Inserta el html de la fila con su id correspondiente
           tbodyRows.insertAdjacentHTML(
             "beforeend",
             innerTr(contadorArray(contadorId))
           );
+
+          //Se introduce el numero correspondiente en la fila
           iteradorView(identificadores, modificadorCifra(contadorView, true));
+
+          //se hace scroll hasta la ultima fila
           scrollTable("divTableRowParams");
 
-          //-----------Results------------
+          //-----------Results-------------------
           tbodyRowsResults.insertAdjacentHTML(
             "beforeend",
             innerResult(contadorArray(contadorId))
           );
+
           iteradorView(
             identificadoresResult,
             modificadorCifra(contadorViewResult, true)
           );
+
           scrollTable("divTableResultScroll");
         }
+
         return;
       }
     });
@@ -366,6 +387,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let row = e.target.closest("tr");
         let numIdRow = row.id.replace("tr", "");
         let rowResult = document.getElementById(`resId${numIdRow}`);
+
+        //-----------Inputs------------
         row.remove();
         contadorArray(contadorId, false);
         iteradorView(identificadores, modificadorCifra(contadorView, false));
