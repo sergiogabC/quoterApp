@@ -10,18 +10,16 @@
     <title>Quoter</title>
   </head>
   <body class="bodyQuoter">
-    <form action="/conversion" method="post" id="formParametros">
+    <form action="/conversion" method="post" id="formExcel" novalidate>
       <div class="divGeneral">
         <!--Botones y tablas del encabezado-->
         <div class="divGrouper">
           <div class="cdivGrouperButtons" id="divGrouperButtons">
             <!-- Boton Mostrar Parametros -->
             <div class="divButtonShowParams" id="divButtonParams">
-              <div>
-                <button class="buttonShowParams" id="viewParams" type="button">
-                  Mostrar Parametros
-                </button>
-              </div>
+              <button class="buttonShowParams" id="viewParams" type="button">
+                Mostrar Parametros
+              </button>
             </div>
 
             <!--Seccion Tabla Resultados-->
@@ -157,6 +155,7 @@
                 </div>
               </div>
             </div>
+            
           </div>
 
           <!--Seccion Tabla Parametros -->
@@ -585,10 +584,10 @@
           <!--Botones Enviar y Calcular-->
           <div class="divButtonConAndCalc">
             <div class="buttonConvert">
-              <button type="submit" form="formParametros">Enviar</button>
+              <button type="submit" form="formExcel" id="excel">EXCEL</button>
             </div>
-            <div class="buttonCalc">
-              <button type="button" id="calcular">Calcular</button>
+            <div class="buttonCalc" id="divButtonCalc">
+              <button type="button" id="calculate">CALCULAR</button>
             </div>
           </div>
         </div>

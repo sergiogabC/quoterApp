@@ -59,7 +59,7 @@ table tr th {
   position: sticky;
   z-index: 2;
   top: 0;
-  line-height: 1.2;
+  line-height: 1;
 }
 
 strong {
@@ -107,7 +107,7 @@ a {
   border: 2px solid #6fb4fe;
 }
 
-.trResModified {
+.rowResult.modified {
   background-color: #8cafef;
   transition: background-color 3s ease;
 }
@@ -204,6 +204,10 @@ a {
   width: 100%;
 }
 
+.divButtonShowParams.modified {
+  display: none;
+}
+
 .buttonShowParams {
   width: auto;
   background-color: #8cafef;
@@ -224,15 +228,20 @@ a {
   min-width: auto;
 }
 
+.sectionDivTableParams.modified {
+  display: flex;
+}
+
 .cdivTableParams {
   display: flex;
   width: 100%;
   overflow-x: scroll;
+  justify-content: center;
 }
 
 .cTableParams {
   table-layout: auto;
-  width: 100%;
+  width: 90%;
   min-width: 600px;
 }
 
@@ -255,6 +264,7 @@ a {
   border: none;
   position: static;
   width: 60%;
+  font-size: 0.9rem;
 }
 
 .headTableInputRequired {
@@ -264,6 +274,7 @@ a {
   border: none;
   position: static;
   width: 60%;
+  font-size: 0.9rem;
 }
 
 /*----------Seccion Tabla Resultados-----*/
@@ -283,10 +294,12 @@ a {
   justify-content: center;
   align-items: center;
   width: 100%;
+  gap: 2rem;
 }
 
 .divButtonPreView {
   display: flex;
+  justify-content: center;
 }
 
 .buttonResult {
@@ -308,10 +321,15 @@ a {
   justify-content: center;
 }
 
+.cdivTableResults.modified {
+  display: flex;
+}
+
 .divScroll {
   max-height: 12rem;
   overflow-y: scroll;
   display: block;
+  width: 100%;
 }
 
 .ctableResults {
@@ -519,26 +537,27 @@ a {
   justify-content: center;
   width: 100%;
   min-width: max-content;
+  gap: 2rem;
 }
 
 .buttonConvert {
-  width: 5rem;
+  width: auto;
   height: 3rem;
   background-color: #8cafef;
   display: flex;
   border: solid 1px #d9d9d9;
   border-radius: 15px;
-  margin-right: 0.75rem;
+  padding: 0.5rem;
 }
 
 .buttonCalc {
-  width: 5rem;
+  width: auto;
   height: 3rem;
   background-color: #8cafef;
   display: flex;
   border: solid 1px #d9d9d9;
   border-radius: 15px;
-  margin-left: 0.75rem;
+  padding: 0.5rem;
 }
 
 /*--Estilos auxiliares para cambiar con js--*/
@@ -549,6 +568,43 @@ a {
 
 /*----------- Media Queries -----------*/
 
+@media (min-width: 1500px) {
+  .headTableInput {
+    font-size: 1rem;
+  }
+
+  .headTableInputRequired {
+    font-size: 1rem;
+  }
+
+  table tr th {
+    line-height: 1.2;
+  }
+
+  strong {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1700px) {
+  .headTableInput {
+    font-size: 1.2rem;
+  }
+
+  .headTableInputRequired {
+    font-size: 1.2rem;
+  }
+
+  table tr th {
+    line-height: 1.4;
+  }
+
+  strong {
+    font-size: 1rem;
+  }
+}
+
+/*-Max-width-*/
 @media (max-width: 1320px) {
   .sectionSpacer {
     flex-direction: column-reverse;
@@ -570,9 +626,34 @@ a {
   }
 }
 
+@media (max-width: 650px) {
+  .cdivTableParams {
+    justify-content: unset;
+  }
+}
+
 @media (max-width: 450px) {
   .cdivGrouperButtons {
-    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .buttonShowParams {
+    width: 100%;
+  }
+
+  .buttonResult {
+    width: 100%;
+  }
+
+  .divButtonPreView {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .cdivGrouperButtons.modified {
+    width: 100%;
     flex-direction: column;
   }
 }

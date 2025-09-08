@@ -122,7 +122,7 @@ const parametersSecExcel = z.object({
       } else {
         let list = [];
         for (let v of val) {
-          !isNaN(v) ? list.push(Number(v)) : new Error("margin: is nan");
+          !isNaN(v) ? list.push(Number(v)) : 0;
         }
         return list;
       }
@@ -157,7 +157,7 @@ const parametersSecExcel = z.object({
     } else {
       let list = [];
       for (let v of val) {
-        !isNaN(v) ? list.push(Number(v)) : new Error("qty: is nan");
+        !isNaN(v) ? list.push(Number(v)) : 0;
       }
       return list;
     }
@@ -171,13 +171,13 @@ const parametersSecExcel = z.object({
   discount: z.preprocess(
     (val) => {
       if (!Array.isArray(val)) {
-        !isNaN(val) ? (val = Number(val)) : (val = 0);
+        !isNaN(val) ? (val = Math.round(Number(val))) : (val = 0);
         let list = [val];
         return list;
       } else {
         let list = [];
         for (let v of val) {
-          !isNaN(v) ? list.push(Number(v)) : new Error("discount: is nan");
+          !isNaN(v) ? list.push(Math.round(Number(v))) : 0;
         }
         return list;
       }
@@ -187,9 +187,10 @@ const parametersSecExcel = z.object({
         .number()
         .catch(0)
         .transform((val) => {
-          if (val < 0) val = 0;
-          if (val > 99) val = 99;
-          return val;
+          if (val == 0) return 0;
+          if (val < 0) return 0;
+          if (val > 99) return 99 / 100;
+          return val / 100;
         })
     )
   ),

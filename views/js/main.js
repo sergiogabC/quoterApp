@@ -211,7 +211,7 @@ const innerResult = (num) => {
                         </td>
                         <td class="cardResultData dataResult">
                           <strong
-                            id="resFinancedMonthlyPriceSite1"
+                            id="resFinancedMonthlyPriceSite${num}"
                             class="dataResult"
                           >
                             0.00
@@ -254,12 +254,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (btnMostrarParametros != null) {
     btnMostrarParametros.addEventListener("click", () => {
-      if (divParams.style.display === "flex") {
-        divParams.style.display = "none";
+      if (getComputedStyle(divParams).display === "flex") {
+        divParams.classList.remove("modified");
         btnMostrarParametros.innerText = "Mostrar Parametros";
         divGroupButtons.classList.remove("modified");
       } else {
-        divParams.style.display = "flex";
+        divParams.classList.add("modified");
         btnMostrarParametros.innerText = "Ocultar Parametros";
         divGroupButtons.classList.add("modified");
       }
@@ -270,15 +270,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (btnPreview != null) {
     btnPreview.addEventListener("click", () => {
-      if (divTableResults.style.display === "flex") {
-        divTableResults.style.display = "none";
-        divButtonParams.style.display = "flex";
+      if (getComputedStyle(divTableResults).display === "flex") {
+        divTableResults.classList.remove("modified");
+        divButtonParams.classList.remove("modified");
         btnPreview.innerText = "Pre - Visualizacíon";
         divGroupButtons.classList.remove("modified");
       } else {
-        divTableResults.style.display = "flex";
-        divParams.style.display = "none";
-        divButtonParams.style.display = "none";
+        divTableResults.classList.add("modified");
+        divParams.classList.remove("modified");
+        divButtonParams.classList.add("modified");
         btnMostrarParametros.innerText = "Mostrar Parametros";
         btnPreview.innerText = "Ocultar";
         divGroupButtons.classList.remove("modified");
@@ -401,4 +401,60 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+});
+
+/*--------- Verificacion de inputs requeridos  ----------*/
+
+document.addEventListener("DOMContentLoaded", () => {
+  const formExcel = document.getElementById("formExcel");
+  const tableParam = document.getElementById("divParams");
+
+  formExcel.addEventListener("submit", (e) => {
+    //Detener envío
+    e.preventDefault();
+
+    //Elementos Requeridos
+    const invalid = [...formExcel.querySelectorAll("[required]")].find(
+      (input) => !input.value
+    );
+
+    if (!invalid) return formExcel.submit();
+
+    //Buscar si algún input requerido que está oculto está vacío
+    const hiddenInvalid = [...formExcel.querySelectorAll("[required]")].find(
+      (input) => input.offsetParent === null && !input.value
+    );
+
+    if (hiddenInvalid) {
+      const btnMostrarParametros = document.getElementById("viewParams");
+      const btnPreview = document.getElementById("preView");
+      const divTableResults = document.getElementById("divTableResults");
+      const divParams = document.getElementById("divParams");
+      const divButtonParams = document.getElementById("divButtonParams");
+      const divGroupButtons = document.getElementById("divGrouperButtons");
+
+      //Mostrar la tabla
+      if (getComputedStyle(tableParam).display === "flex") {
+        divParams.classList.remove("modified");
+        btnMostrarParametros.innerText = "Mostrar Parametros";
+        divGroupButtons.classList.remove("modified");
+      } else {
+        divTableResults.classList.remove("modified");
+        divButtonParams.classList.remove("modified");
+        btnPreview.innerText = "Pre - Visualizacíon";
+
+        divParams.classList.add("modified");
+
+        btnMostrarParametros.innerText = "Ocultar Parametros";
+        divGroupButtons.classList.add("modified");
+        tableParam.classList.add("modified");
+      }
+
+      //Dar foco al primer input inválido
+      hiddenInvalid.focus();
+      return;
+    }
+
+    invalid.focus();
+  });
 });

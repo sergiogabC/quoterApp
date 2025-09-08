@@ -164,10 +164,6 @@ export class LogicController {
 
     const parametersData = new ParametersData(validateP.data);
 
-    if (contSizeData > 1000) {
-      console.log("xxx");
-    }
-
     for (let i = 0; i < contSizeData; i++) {
       let response = { cost: 0 };
       try {
